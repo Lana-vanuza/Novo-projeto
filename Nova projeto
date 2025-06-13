@@ -203,4 +203,13 @@ footer a {
     <div class="container">
       <h3>Sobre a nossa loja</h3>
       <p>
-        Somos uma
+        Somos uma loja independente inspirada nas maiores plataformas do Brasil. Oferecemos agilidade, confiança e produtos selecionados com o melhor custo‑benefício.
+      </p>
+      <p>
+        Contato:
+        <a href="mailto:contato@sualoja.com">contato@sualoja.com</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
