@@ -169,4 +169,155 @@ header .logo {
   padding: 6px 12px;
   border-radius: 4px;
   width: fit-content;
-  box-shadow: 0 2px 5px rgba(0
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  user-select: none;
+}
+
+/* ===== A PARTIR DAQUI VOLTA AO ESTILO ORIGINAL (mais simples) ===== */
+
+/* Preço */
+.preco {
+  color: #00a650;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+/* Parcelas */
+.parcelas {
+  font-size: 13px;
+  color: #666;
+  margin-left: 8px;
+}
+
+/* Quantidade */
+.qtde {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.qtde label {
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+#qtde-select {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Botão comprar */
+.btn-comprar {
+  margin-top: 20px;
+  background-color: #3483fa;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.btn-comprar:hover {
+  background-color: #2769c6;
+}
+
+/* Descrição */
+.descricao {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+.descricao h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  .produto-container {
+    margin: 10px 10px 20px 10px;
+    padding: 15px;
+  }
+  
+  header {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .header-center {
+    max-width: 100%;
+  }
+
+  .busca-input {
+    max-width: 100%;
+  }
+
+  .btn-comprar {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+}
+
+/* --- Estilo da página cep.html --- */
+.cep-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.cep-container h2 {
+  font-weight: 700;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cep-container label {
+  display: block;
+  font-weight: 600;
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+.cep-container input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.cep-container button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #3483fa;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cep-container button:hover {
+  background-color: #2769c6;
+}
