@@ -3,55 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meu Site Estilo Mercado Livre</title>
+  <title>Samsung Galaxy A25 5G | LibreMerc</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-
-  <!-- Faixa de topo -->
   <div class="faixa-topo">
     <p>Abra o app e ganhe frete grátis na sua primeira compra</p>
   </div>
 
-  <!-- Cabeçalho -->
   <header>
-    <img src="assets/logo.png" alt="Logo">
-
+    <img src="assets/logo.png" alt="Logo LibreMerc">
     <div class="busca">
-      <input type="text" placeholder="Estou buscando..." />
+      <input type="search" placeholder="Estou buscando..." />
     </div>
-
     <div class="icones">
       <i class="fas fa-shopping-cart"></i>
     </div>
   </header>
 
-  <!-- Campo de CEP -->
   <section class="cep">
     <p><i class="fas fa-map-marker-alt"></i> Informe seu CEP</p>
   </section>
 
-  <!-- Info produto -->
-  <section class="info-produto">
-    <div class="tag-mais-vendido">MAIS VENDIDO</div>
-    <div class="categoria">5º em Celulares e Smartphones</div>
-    <h1>Samsung Galaxy A25 5G Dual SIM 128Gb Azul Escuro 6Gb Ram</h1>
-    <div class="avaliacao">
-      <span class="estrelas">★★★★★</span>
-      <span class="total">+10 mil vendidos</span>
-    </div>
-  </section>
+  <main class="produto-container">
+    <section class="info-produto">
+      <div class="tag-mais-vendido">MAIS VENDIDO</div>
+      <div class="categoria">5° em Celulares e Smartphones</div>
+      <h1>Samsung Galaxy A25 5G Dual SIM 128GB Azul Escuro 6GB Ram</h1>
+      <div class="avaliacao">
+        <span class="estrelas">★★★★★</span>
+        <span class="total">+10 mil vendidos</span>
+      </div>
+      <div class="preco-detalhe">
+        <span class="preco">R$ 1.999,00</span>
+        <small class="parcelas">em até 12x de R$ 166,59 sem juros</small>
+      </div>
+      <div class="qtde">
+        <label for="qtde-select">Quantidade:</label>
+        <select id="qtde-select">
+          <option>1 unidade</option>
+          <option>2 unidades</option>
+        </select>
+      </div>
+      <button class="btn-comprar">Comprar agora</button>
+    </section>
 
-  <!-- Imagem do produto -->
-  <section class="galeria">
-    <img src="assets/produto-a.jpeg" alt="Galaxy A25" />
-  </section>
+    <section class="galeria">
+      <img src="assets/produto-a.jpeg" alt="Galaxy A25" />
+    </section>
 
-  <!-- Botão de compra -->
-  <section class="comprar">
-    <button class="btn-comprar">Comprar Agora</button>
-  </section>
-
+    <section class="descricao">
+      <h2>Descrição do produto</h2>
+      <p>Smartphone Samsung Galaxy A25 5G com 128 GB de armazenamento, 6 GB de RAM, suporte a dual SIM. Tela 6,5' Full HD+, câmera traseira de 50 MP e frontal de 13 MP, bateria de 5 000 mAh. Garantia de 12 meses contra defeitos de fabricação.</p>
+      <p>Inclui carregador rápido, cabo USB-C e capa protetora.</p>
+    </section>
+  </main>
 </body>
 </html>
