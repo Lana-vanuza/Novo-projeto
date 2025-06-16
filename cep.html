@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe seu CEP - LibreMerc</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="form-cep">
+    <h1>Informe seu CEP para calcular o frete</h1>
+    <input type="text" id="cep" placeholder="00000-000">
+    <button onclick="salvarCEP()">Salvar</button>
+  </main>
+
+  <script>
+    function salvarCEP() {
+      const cep = document.getElementById("cep").value;
+      if (cep.length >= 8) {
+        localStorage.setItem("cep", cep);
+        window.location.href = "index.html";
+      } else {
+        alert("Digite um CEP válido.");
+      }
+    }
+  </script>
+</body>
+</html>
