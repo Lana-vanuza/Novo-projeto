@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset e base */
 * {
   margin: 0;
   padding: 0;
@@ -6,12 +6,12 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   background-color: #f5f5f5;
   color: #333;
 }
 
-/* Cabeçalho */
+/* Header */
 header {
   background-color: #ffe600;
   padding: 10px;
@@ -43,38 +43,79 @@ header img {
 .icones {
   font-size: 22px;
   color: #333;
-  margin-right: 10px;
 }
 
+/* Seção de endereço */
 .cep {
   background-color: #fff466;
   padding: 10px;
-  text-align: left;
   font-size: 14px;
+  color: #333;
 }
 
 .cep a {
   text-decoration: none;
   color: #333;
+  font-weight: bold;
 }
 
-/* Produto */
+/* Container de Produto */
 .produto {
   background-color: #fff;
-  padding: 16px;
-  margin: 12px auto;
+  padding: 20px;
+  margin: 15px auto;
   max-width: 600px;
   width: 90%;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.produto h3 {
-  font-size: 13px;
-  color: #555;
+/* Selo "Mais vendido" */
+.selo {
+  background-color: #f73;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
+/* Nome do produto */
 .produto h1 {
   font-size: 22px;
   font-weight: bold;
-  m
+  margin-top: 5px;
+  color: #333;
+}
+
+/* Avaliação */
+.avaliacao {
+  color: #3483fa;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+.avaliacao span {
+  color: #555;
+  font-weight: normal;
+}
+
+/* Imagem do produto */
+.produto img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-top: 12px;
+  display: block;
+}
+
+/* Preço */
+.preco {
+  color: #00a650;
+  font-size: 28px;
+  font-weight: bold;
+  margin-
