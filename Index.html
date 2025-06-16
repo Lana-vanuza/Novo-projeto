@@ -33,9 +33,9 @@
     </div>
   </header>
 
-  <section class="cep">
-    <p><i class="fas fa-map-marker-alt"></i> Informe seu CEP</p>
-  </section>
+  <section class="cep" id="cep-info">
+  <a href="cep.html"><i class="fas fa-map-marker-alt"></i> Informe seu CEP</a>
+</section>
 
   <main class="produto-container">
     <section class="info-produto">
@@ -71,5 +71,13 @@
       <p>Inclui carregador rápido, cabo USB-C e capa protetora.</p>
     </section>
   </main>
+  <script>
+  const cepSalvo = localStorage.getItem("cep");
+  if (cepSalvo) {
+    const cepInfo = document.getElementById("cep-info");
+    cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}</strong></p>`;
+  }
+</script>
+
 </body>
 </html>
