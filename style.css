@@ -11,159 +11,178 @@ body {
   color: #333;
 }
 
-/* Header */
 header {
   background-color: #ffe600;
-  padding: 10px 16px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
-.logo {
-  height: 32px;
-  margin-right: 8px;
+header img {
+  height: 40px;
 }
 
-.header-center {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.busca {
+  flex-grow: 1;
+  margin: 0 10px;
 }
 
-.busca-input {
-  flex: 1;
+.busca input[type="search"] {
+  width: 100%;
   padding: 10px;
-  border-radius: 8px;
   border: none;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
-.menu-icon, .cart-icon {
-  font-size: 20px;
-  margin-left: 12px;
-  cursor: pointer;
-}
-
-/* CEP bar */
-.cep-bar {
-  background-color: #fff466;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  gap: 6px;
+.icones {
+  font-size: 22px;
   color: #333;
 }
 
-.cep-bar a {
+.cep {
+  background-color: #fff466;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.cep a {
   text-decoration: none;
-  color: inherit;
+  color: #333;
 }
 
-/* Produto */
-.container {
-  max-width: 900px;
-  margin: 20px auto;
-  background-color: white;
-  border-radius: 10px;
+.produto {
+  background-color: #fff;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin: 10px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.produto-top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+.produto h3 {
+  font-size: 12px;
+  color: #555;
 }
 
-.produto-info {
-  flex: 1;
-}
-
-.produto-info h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.produto h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #333;
 }
 
 .avaliacao {
-  color: #f6b800;
-  margin-bottom: 5px;
-}
-
-.vendidos {
+  color: #f0c14b;
   font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
+  margin: 5px 0;
 }
 
-.mais-vendido {
-  background-color: #ff6f00;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.produto-img {
-  max-width: 280px;
+.produto img {
   width: 100%;
+  max-width: 100%;
   height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-/* Preço */
 .preco {
+  color: #00a650;
   font-size: 24px;
   font-weight: bold;
-  margin-top: 15px;
-  color: #00a650;
+  margin-top: 10px;
 }
 
-/* Botões */
-.botoes {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.parcelamento {
+  font-size: 14px;
+  color: #555;
 }
 
-.botao {
+.quantidade {
+  margin: 15px 0;
+}
+
+.quantidade label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.botao-comprar {
   background-color: #3483fa;
   color: white;
-  border: none;
   padding: 12px 20px;
+  border: none;
   border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 14px;
 }
 
-.botao:hover {
+.botao-comprar:hover {
   background-color: #2968c8;
 }
 
-/* Descrição completa */
 .descricao {
   margin-top: 20px;
-  line-height: 1.6;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .produto-top {
-    flex-direction: column;
-    align-items: center;
-  }
+.descricao h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-  .header-center {
-    width: 100%;
-    margin-top: 10px;
-  }
+.descricao p {
+  font-size: 14px;
+  line-height: 1.5;
+}
 
-  .busca-input {
-    width: 100%;
-  }
+/* Estilo para a página de CEP */
+
+.cep-container {
+  background-color: #ffe600;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cep-form {
+  background-color: white;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cep-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.cep-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.cep-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cep-form button {
+  width: 100%;
+  background-color: #3483fa;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cep-form button:hover {
+  background-color: #2968c8;
 }
