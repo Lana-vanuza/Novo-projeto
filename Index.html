@@ -73,9 +73,11 @@
   </main>
   <script>
   const cepSalvo = localStorage.getItem("cep");
-  if (cepSalvo) {
+  const cidadeSalva = localStorage.getItem("cidade");
+
+  if (cepSalvo && cidadeSalva) {
     const cepInfo = document.getElementById("cep-info");
-    cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}</strong></p>`;
+    cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
   }
 </script>
 
