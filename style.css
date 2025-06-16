@@ -1,4 +1,4 @@
-/* Reset e base */
+/* RESET e BASE */
 * {
   margin: 0;
   padding: 0;
@@ -6,291 +6,167 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
-  line-height: 1.5;
-  min-height: 100vh;
+  line-height: 1.4;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
   background-color: #ffe600;
-  padding: 10px 20px;
+  width: 100%;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 15px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 header .logo {
   height: 40px;
-  width: auto;
-  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
 }
 
-/* ===== BARRA CEP ===== */
-.cep-bar {
-  max-width: 600px;
-  background-color: #fff466;
-  margin: 15px auto;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #333;
-  cursor: pointer;
+.header-center {
+  flex-grow: 1;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: background-color 0.3s ease;
 }
 
-.cep-bar:hover {
-  background-color: #fff066;
+.busca-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: border-color 0.3s;
 }
 
-.cep-bar a,
-.cep-bar p {
+.busca-input:focus {
+  outline: none;
+  border-color: #3483fa;
+}
+
+.menu-icon,
+.cart-icon {
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* FAIXA DE CEP */
+.cep-bar {
+  background-color: #ffe600;
+  width: 100%;
+  padding: 8px 15px;
+  box-sizing: border-box;
+  border-top: 1px solid #f7d700;
+  border-bottom: 1px solid #f7d700;
+  font-size: 14px;
+}
+
+.cep-bar a, .cep-bar p {
+  color: #333;
+  font-weight: bold;
   text-decoration: none;
-  color: inherit;
-  font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .cep-bar i {
-  font-size: 18px;
-  color: #333;
+  color: #3483fa;
 }
 
-/* ===== CONTAINER PRODUTO ===== */
+/* CONTAINER PRINCIPAL */
 .produto-container {
-  max-width: 600px;
+  max-width: 700px;
+  margin: 20px auto;
   background-color: #fff;
-  margin: 15px auto 40px;
-  padding: 25px 25px 35px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  padding: 20px;
 }
 
-/* Selo "MAIS VENDIDO" */
+/* INFO PRODUTO */
+.info-produto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Selo mais vendido */
 .tag-mais-vendido {
-  background-color: #ff6600; /* laranja forte Mercado Livre */
-  color: white;
-  font-weight: 700;
-  font-size: 13px;
-  padding: 5px 12px;
+  background-color: #ff6600;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 10px;
   border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 12px;
-  text-transform: uppercase;
+  width: fit-content;
 }
 
 /* Categoria */
 .categoria {
   font-size: 13px;
   color: #999;
-  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-/* Título do produto */
-.produto-container h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 12px;
-  line-height: 1.2;
+/* Título produto */
+.info-produto h1 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
 }
 
 /* Avaliação */
 .avaliacao {
-  color: #3483fa;
   font-weight: 700;
   font-size: 14px;
-  margin-bottom: 20px;
+  color: #3483fa;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.avaliacao .estrelas {
-  font-size: 18px;
+.estrelas {
+  color: #3483fa;
+  font-size: 16px;
 }
 
-/* Galeria */
+.total {
+  color: #555;
+  font-weight: 400;
+}
+
+/* Galeria da imagem */
+.galeria {
+  margin-top: 15px;
+  position: relative;
+}
+
 .galeria img {
   width: 100%;
   border-radius: 6px;
-  margin-bottom: 25px;
   display: block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Preço e parcelas */
-.preco-detalhe {
-  margin-bottom: 25px;
-}
-
-.preco {
-  color: #00a650;
-  font-size: 32px;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.parcelas {
-  font-size: 13px;
-  color: #666;
-}
-
-/* Quantidade */
-.qtde {
-  margin-bottom: 25px;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.qtde label {
-  font-weight: 600;
-  color: #333;
-}
-
-.qtde select {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* Botão comprar */
-.btn-comprar {
-  width: 100%;
-  max-width: 600px;
-  background-color: #3483fa;
-  color: white;
-  font-weight: 700;
-  font-size: 18px;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: block;
-  margin: 0 auto;
-}
-
-.btn-comprar:hover {
-  background-color: #2968c8;
-}
-
-/* Descrição */
-.descricao {
-  max-width: 600px;
-  margin: 0 auto 40px;
-  padding: 0 15px;
-  color: #444;
-}
-
-.descricao h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.descricao p {
-  font-size: 15px;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-/* ===== PÁGINA CEP ===== */
-.cep-container {
-  max-width: 450px;
-  margin: 30px auto;
-  background-color: white;
-  padding: 25px 25px 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-}
-
-.cep-container h2 {
-  font-size: 22px;
-  font-weight: 700;
+/* Destaque oferta do dia */
+.oferta-dia {
+  margin-top: 12px;
+  background-color: #f7d13d;
   color: #222;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-.cep-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.cep-container label {
-  font-weight: 600;
-  font-size: 14px;
-  color: #444;
-}
-
-.cep-container input[type="text"] {
-  padding: 10px 15px;
-  font-size: 15px;
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
-}
-
-.cep-container input[type="text"]:focus {
-  outline: none;
-  border-color: #3483fa;
-  box-shadow: 0 0 6px rgba(52, 131, 250, 0.5);
-}
-
-.cep-container button[type="submit"] {
-  margin-top: 15px;
-  background-color: #3483fa;
-  color: white;
-  font-size: 17px;
   font-weight: 700;
-  border: none;
-  padding: 14px 0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cep-container button[type="submit"]:hover {
-  background-color: #2968c8;
-}
-
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 640px) {
-  header {
-    justify-content: center;
-    padding: 15px 10px;
-  }
-
-  .cep-bar {
-    width: 90%;
-    margin: 10px auto;
-    font-size: 14px;
-    padding: 10px 15px;
-  }
-
-  .produto-container,
-  .descricao,
-  .cep-container {
-    width: 90%;
-    padding: 20px 15px;
-  }
-
-  .btn-comprar {
-    font-size: 16px;
-    padding: 12px 0;
-  }
-}
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  width: fit-content;
+  box-shadow: 0 2px 5px rgba(0
