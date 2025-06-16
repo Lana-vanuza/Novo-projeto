@@ -2,30 +2,56 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Detalhe do Produto | Sua Loja</title>
-  <link rel="icon" href="favicon.ico" />
-
-  <!-- Aqui está o estilo conectado -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meu Site Estilo Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-  <header>
-    <a href="index.html"><img src="assets/logo.png" alt="Voltar à Home" /></a>
-  </header>
 
-  <main>
-    <div class="galeria">
-      <img src="assets/produto-a.jpeg" alt="Produto A frente" />
-      <img src="assets/produto-a-2.jpeg" alt="Produto A detalhe" />
+  <!-- Faixa de topo -->
+  <div class="faixa-topo">
+    <p>Abra o app e ganhe frete grátis na sua primeira compra</p>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header>
+    <img src="assets/logo.png" alt="Logo">
+
+    <div class="busca">
+      <input type="text" placeholder="Estou buscando..." />
     </div>
 
-    <section class="info">
-      <h1>Produto A – Descrição curta</h1>
-      <p class="preco">R$ 129,90</p>
-      <p>Descrição longa do produto, especificações, materiais, garantia, etc.</p>
-      <button class="btn-comprar">Comprar agora</button>
-    </section>
-  </main>
+    <div class="icones">
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+  </header>
+
+  <!-- Campo de CEP -->
+  <section class="cep">
+    <p><i class="fas fa-map-marker-alt"></i> Informe seu CEP</p>
+  </section>
+
+  <!-- Info produto -->
+  <section class="info-produto">
+    <div class="tag-mais-vendido">MAIS VENDIDO</div>
+    <div class="categoria">5º em Celulares e Smartphones</div>
+    <h1>Samsung Galaxy A25 5G Dual SIM 128Gb Azul Escuro 6Gb Ram</h1>
+    <div class="avaliacao">
+      <span class="estrelas">★★★★★</span>
+      <span class="total">+10 mil vendidos</span>
+    </div>
+  </section>
+
+  <!-- Imagem do produto -->
+  <section class="galeria">
+    <img src="assets/produto-a.jpeg" alt="Galaxy A25" />
+  </section>
+
+  <!-- Botão de compra -->
+  <section class="comprar">
+    <button class="btn-comprar">Comprar Agora</button>
+  </section>
+
 </body>
 </html>
