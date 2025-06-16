@@ -1,112 +1,169 @@
-body {
-  font-family: Arial, sans-serif;
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Header */
 header {
   background-color: #ffe600;
   padding: 10px 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .logo {
-  height: 40px;
+  height: 32px;
+  margin-right: 8px;
 }
 
-.cep {
+.header-center {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  font-size: 0.9rem;
-}
-
-.cep a, .cep p {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-main {
-  max-width: 960px;
-  margin: auto;
-  padding: 16px;
-}
-
-.galeria {
-  display: flex;
   gap: 12px;
-  overflow-x: auto;
 }
 
-.galeria img {
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border: 1px solid #eee;
+.busca-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
-.info {
-  margin-top: 16px;
+.menu-icon, .cart-icon {
+  font-size: 20px;
+  margin-left: 12px;
+  cursor: pointer;
 }
 
-.preco {
-  font-size: 1.6rem;
-  font-weight: 700;
+/* CEP bar */
+.cep-bar {
+  background-color: #fff466;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 6px;
   color: #333;
 }
 
-.btn-comprar {
-  background: #ffe600;
-  padding: 12px 24px;
-  border: none;
-  font-weight: 600;
-  margin-top: 16px;
-  width: 100%;
+.cep-bar a {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* CEP PAGE */
-
-.cep-container {
-  max-width: 480px;
-  margin: 40px auto;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+/* Produto */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.cep-container h2 {
-  margin-bottom: 16px;
-  font-size: 1.4rem;
+.produto-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.cep-container label {
-  display: block;
-  margin: 12px 0 4px;
+.produto-info {
+  flex: 1;
 }
 
-.cep-container input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
+.produto-info h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.avaliacao {
+  color: #f6b800;
+  margin-bottom: 5px;
+}
+
+.vendidos {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.mais-vendido {
+  background-color: #ff6f00;
+  color: white;
+  padding: 4px 8px;
   border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
-.cep-container button {
-  margin-top: 20px;
+.produto-img {
+  max-width: 280px;
   width: 100%;
-  background-color: #ffe600;
-  border: none;
-  padding: 12px;
+  height: auto;
+}
+
+/* Preço */
+.preco {
+  font-size: 24px;
   font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
+  margin-top: 15px;
+  color: #00a650;
 }
 
-.cep-container button:hover {
-  background-color: #f7d800;
+/* Botões */
+.botoes {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.botao {
+  background-color: #3483fa;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.botao:hover {
+  background-color: #2968c8;
+}
+
+/* Descrição completa */
+.descricao {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .produto-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-center {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .busca-input {
+    width: 100%;
+  }
 }
