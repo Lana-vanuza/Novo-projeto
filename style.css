@@ -1,188 +1,212 @@
 /* Reset básico */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 header {
-  background-color: #ffe600;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background-color: #ffe600;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 header img {
-  height: 40px;
+  height: 40px;
 }
 
 .busca {
-  flex-grow: 1;
-  margin: 0 10px;
+  flex-grow: 1;
+  margin: 10px;
 }
 
 .busca input[type="search"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
 }
 
 .icones {
-  font-size: 22px;
-  color: #333;
+  font-size: 22px;
+  color: #333;
+  margin-right: 10px;
 }
 
 .cep {
-  background-color: #fff466;
-  padding: 10px;
-  text-align: left;
-  font-size: 14px;
+  background-color: #fff466;
+  padding: 10px;
+  font-size: 14px;
 }
 
 .cep a {
-  text-decoration: none;
-  color: #333;
+  text-decoration: none;
+  color: #333;
 }
 
 .produto {
-  background-color: #fff;
-  padding: 20px;
-  margin: 10px auto;
-  max-width: 600px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #fff;
+  padding: 16px;
+  margin: 12px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .produto h3 {
-  font-size: 12px;
-  color: #555;
+  font-size: 13px;
+  color: #555;
 }
 
 .produto h1 {
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 5px;
-  color: #333;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #333;
 }
 
 .avaliacao {
-  color: #f0c14b;
-  font-size: 14px;
-  margin: 5px 0;
+  color: #f0c14b;
+  font-size: 14px;
+  margin: 5px 0;
 }
 
 .produto img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-  margin-top: 8px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-top: 12px;
 }
 
 .preco {
-  color: #00a650;
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
+  color: #00a650;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .parcelamento {
-  font-size: 14px;
-  color: #555;
+  font-size: 14px;
+  color: #555;
 }
 
 .quantidade {
-  margin: 15px 0;
+  margin: 15px 0;
 }
 
 .quantidade label {
-  margin-right: 10px;
-  font-weight: bold;
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 .botao-comprar {
-  background-color: #3483fa;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+  background-color: #3483fa;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
 }
 
 .botao-comprar:hover {
-  background-color: #2968c8;
+  background-color: #2968c8;
 }
 
 .descricao {
-  margin-top: 20px;
+  margin-top: 20px;
 }
 
 .descricao h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .descricao p {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* Estilo para a página de CEP */
 
 .cep-container {
-  background-color: #ffe600;
-  min-height: 100vh;
-  padding: 20px;
+  background-color: #ffe600;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .cep-form {
-  background-color: white;
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .cep-form h2 {
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .cep-form label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .cep-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .cep-form button {
-  width: 100%;
-  background-color: #3483fa;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+  width: 100%;
+  background-color: #3483fa;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .cep-form button:hover {
-  background-color: #2968c8;
+  background-color: #2968c8;
+}
+
+/* Responsividade para celular */
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .busca {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .produto {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  .botao-comprar {
+    font-size: 18px;
+  }
 }
