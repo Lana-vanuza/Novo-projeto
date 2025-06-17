@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho | LibreMerc</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .produto {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .produto h3 {
+      margin: 0;
+    }
+
+    .produto p {
+      margin: 4px 0;
+    }
+
+    button {
+      background-color: #3483fa;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="assets/logo.png" alt="Logo LibreMerc" class="logo" /></a>
+  </header>
+
+  <main class="container">
+    <h2>Escolha seus produtos</h2>
+
+    <div class="produto">
+      <h3>Produto 1</h3>
+      <p>Preço: R$ <span class="preco">199.90</span></p>
+      <button onclick="adicionarCarrinho('Produto 1', 199.90)">Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <h3>Produto 2</h3>
+      <p>Preço: R$ <span class="preco">349.50</span></p>
+      <button onclick="adicionarCarrinho('Produto 2', 349.50)">Adicionar ao carrinho</button>
+    </div>
+
+    <div class="produto">
+      <h3>Produto 3</h3>
+      <p>Preço: R$ <span class="preco">89.00</span></p>
+      <button onclick="adicionarCarrinho('Produto 3', 89.00)">Adicionar ao carrinho</button>
+    </div>
+
+    <br>
+    <a href="checkout.html">
+      <button>Ir para o Checkout</button>
+    </a>
+  </main>
+
+  <script>
+    function adicionarCarrinho(nome, preco) {
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+      const existente = carrinho.find(item => item.nome === nome);
+      if (existente) {
+        existente.quantidade += 1;
+      } else {
+        carrinho.push({ nome, preco, quantidade: 1 });
+      }
+
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      alert(`${nome} adicionado ao carrinho!`);
+    }
+  </script>
+</body>
+</html>
