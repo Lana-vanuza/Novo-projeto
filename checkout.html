@@ -3,89 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout - Informe seus dados | LibreMerc</title>
+  <title>Checkout | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-  <header>
-    <img src="assets/logo.png" alt="Logo LibreMerc" class="logo" />
-    <div class="header-center">
-      <input type="search" class="busca-input" placeholder="Estou buscando..." />
-      <i class="fas fa-bars menu-icon"></i>
-      <i class="fas fa-shopping-cart cart-icon"></i>
-    </div>
+  <header class="header-site">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
+    </a>
   </header>
 
-  <section class="cep-bar" id="cep-info">
-    <a href="cep.html"><i class="fas fa-map-marker-alt"></i> Informe seu CEP</a>
-  </section>
-
-  <main class="checkout-container">
-    <h2>Informe seus dados para a nota fiscal</h2>
-    <form id="dadosClienteForm" class="form-checkout">
+  <main class="container">
+    <h2>Finalize sua compra</h2>
+    <form id="checkoutForm">
       <label for="nome">Nome completo:</label>
       <input type="text" id="nome" name="nome" required />
 
       <label for="cpf">CPF:</label>
-      <input type="text" id="cpf" name="cpf" maxlength="14" placeholder="000.000.000-00" required />
+      <input type="text" id="cpf" name="cpf" maxlength="14" required />
 
-      <label for="email">Email:</label>
+      <label for="email">E-mail:</label>
       <input type="email" id="email" name="email" required />
 
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required />
+      <input type="tel" id="telefone" name="telefone" required />
 
-      <label for="endereco">Endereço (resumo):</label>
-      <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro" required />
-
-      <button type="submit" class="btn-pagar">Pagar com desconto Pix</button>
+      <button type="submit">Ir para pagamento</button>
     </form>
   </main>
 
   <script>
-    // Pegar cep salvo e mostrar na faixa amarela (igual index)
-    const cepSalvo = localStorage.getItem("cep");
-    const cidadeSalva = localStorage.getItem("cidade");
-
-    if (cepSalvo && cidadeSalva) {
-      const cepInfo = document.getElementById("cep-info");
-      cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
-    }
-
-    // Máscara simples para CPF
-    function formatCPF(value) {
-      return value
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    }
-
-    const cpfInput = document.getElementById('cpf');
-    cpfInput.addEventListener('input', e => {
-      e.target.value = formatCPF(e.target.value);
-    });
-
-    // Ao enviar form, salvar dados e redirecionar para pix.html
-    document.getElementById('dadosClienteForm').addEventListener('submit', function(e) {
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // Salvar no localStorage para usar no pix.html (se quiser)
-      const dados = {
-        nome: this.nome.value,
-        cpf: this.cpf.value,
-        email: this.email.value,
-        telefone: this.telefone.value,
-        endereco: this.endereco.value,
-      };
-      localStorage.setItem('dadosCliente', JSON.stringify(dados));
+      // Aqui pode validar dados, salvar em localStorage ou backend (se tiver)
 
-      // Redirecionar para pix.html
-      window.location.href = 'pix.html';
+      window.location.href = "pix.html";
     });
   </script>
-
 </body>
 </html>
