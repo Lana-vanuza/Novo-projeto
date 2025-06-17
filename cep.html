@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Informe seu Endereço | Mercado Livre</title>
+  <title>Informe seu Endereço | LibreMerc</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="cep-page">
@@ -17,14 +17,18 @@
   </header>
 
   <main class="container">
+
     <div class="cep-container">
       <h2>Informe seu endereço para entrega</h2>
       <form id="cepForm">
         <label for="cep">CEP:</label>
-        <input type="text" id="cep" required maxlength="9" placeholder="00000-000" />
+        <input type="text" id="cep" required />
 
         <label for="cidade">Cidade:</label>
         <input type="text" id="cidade" required />
+
+        <label for="estado">Estado (UF):</label>
+        <input type="text" id="estado" required />
 
         <label for="rua">Rua:</label>
         <input type="text" id="rua" required />
@@ -41,47 +45,32 @@
         <button type="submit">Salvar endereço</button>
       </form>
     </div>
+
   </main>
 
   <script>
-    document.getElementById("cep").addEventListener("blur", function () {
-      const cep = this.value.replace(/\D/g, '');
+    document.getElementById("cep").addEventListener("blur", async () => {
+      const cep = document.getElementById("cep").value.replace(/\D/g, "");
       if (cep.length !== 8) return;
 
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.erro) {
-            alert("CEP não encontrado!");
-            return;
-          }
-
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
           document.getElementById("cidade").value = data.localidade;
+          document.getElementById("estado").value = data.uf;
           document.getElementById("rua").value = data.logradouro;
           document.getElementById("bairro").value = data.bairro;
-        })
-        .catch(() => {
-          alert("Erro ao buscar o CEP. Tente novamente.");
-        });
+        }
+      } catch (err) {
+        console.error("Erro ao buscar CEP:", err);
+      }
     });
 
     document.getElementById("cepForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
-      const cep = document.getElementById("cep").value;
-      const cidade = document.getElementById("cidade").value;
-      const rua = document.getElementById("rua").value;
-      const numero = document.getElementById("numero").value;
-      const bairro = document.getElementById("bairro").value;
-      const complemento = document.getElementById("complemento").value;
-
-      localStorage.setItem("cep", cep);
-      localStorage.setItem("cidade", cidade);
-      localStorage.setItem("rua", rua);
-      localStorage.setItem("numero", numero);
-      localStorage.setItem("bairro", bairro);
-      localStorage.setItem("complemento", complemento);
-
+      const campos = ["cep", "cidade", "estado", "rua", "numero", "bairro", "complemento"];
+      campos.forEach(id => localStorage.setItem(id, document.getElementById(id).value));
       window.location.href = "index.html";
     });
   </script>
