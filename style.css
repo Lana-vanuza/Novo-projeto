@@ -187,14 +187,17 @@ header .logo {
   background-color: #3483fa;
 }
 
+/* Galeria */
 #mainImage,
 #lightbox img {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
+  will-change: opacity;
 }
 .fade-out {
   opacity: 0;
 }
+
 
 /* Destaque oferta do dia */
 .oferta-dia {
