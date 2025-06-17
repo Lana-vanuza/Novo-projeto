@@ -1,191 +1,192 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pagamento via Pix | Mercado Livre</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .pagamento-container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagamento via Pix | Mercado Livre</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .pagamento-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
 
-    .info-cliente, .info-endereco, .valor-total {
-      text-align: left;
-      margin-bottom: 20px;
-      background: #f8f8f8;
-      padding: 15px;
-      border-radius: 8px;
-    }
+    .cronometro {
+      font-size: 18px;
+      color: red;
+      margin-top: 5px;
+      font-weight: bold;
+    }
 
-    .info-cliente h3,
-    .info-endereco h3,
-    .valor-total h3 {
-      margin-bottom: 8px;
-    }
+    .qr-code {
+      width: 240px;
+      height: 240px;
+      margin: 20px auto;
+      background: #eee;
+    }
 
-    .cronometro {
-      font-size: 18px;
-      color: red;
-      margin-top: 5px;
-      font-weight: bold;
-    }
+    .pix-codigo {
+      background: #f5f5f5;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+    }
 
-    .qr-code {
-      width: 240px;
-      height: 240px;
-      margin: 20px auto;
-      background: #eee;
-    }
+    .pix-codigo-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-    .pix-codigo {
-      background: #f5f5f5;
-      padding: 10px;
-      border-radius: 8px;
-      word-break: break-word;
-      margin: 10px 0;
-    }
+    .pix-codigo-box input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
 
-    .btn-copiar {
-      background-color: #3483fa;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+    #copiarBtn {
+      background-color: #3483fa;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-    .btn-copiar.copiado {
-      background-color: #28a745;
-    }
+    #copiarBtn.copiado {
+      background-color: #28a745;
+    }
 
-    .pix-instrucoes {
-      text-align: left;
-      margin-top: 30px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .pix-instrucoes {
+      text-align: left;
+      margin-top: 30px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
 
-    .pix-instrucoes li {
-      margin-bottom: 8px;
-    }
-  </style>
+    .pix-instrucoes li {
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body class="pix-page">
 
-  <header>
-    <a href="index.html"><img src="assets/logo-1.png" alt="Logo" class="logo" /></a>
-  </header>
+  <header>
+    <a href="index.html"><img src="assets/logo-1.png" alt="Logo" class="logo" /></a>
+  </header>
 
-  <main class="pagamento-container">
-    <div class="info-cliente" id="infoCliente">
-      <h3>Dados do Cliente</h3>
-      <p><strong>Nome:</strong> <span id="nome"></span></p>
-      <p><strong>CPF:</strong> <span id="cpf"></span></p>
-      <p><strong>E-mail:</strong> <span id="email"></span></p>
-      <p><strong>Celular:</strong> <span id="celular"></span></p>
-    </div>
+  <main class="pagamento-container">
+    <h2>Pagamento via Pix</h2>
+    <p><strong>Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
 
-    <div class="info-endereco" id="infoEndereco">
-      <h3>Endereço de Entrega</h3>
-      <p><strong>CEP:</strong> <span id="cep"></span></p>
-      <p><strong>Rua:</strong> <span id="rua"></span>, <span id="numero"></span></p>
-      <p><strong>Bairro:</strong> <span id="bairro"></span></p>
-      <p><strong>Cidade/UF:</strong> <span id="cidade"></span> - <span id="estado"></span></p>
-      <p><strong>Complemento:</strong> <span id="complemento"></span></p>
-    </div>
+    <!-- Dados do cliente -->
+    <div class="pix-codigo">
+      <strong>Dados do cliente:</strong><br><br>
+      <div><strong>Nome:</strong> <span id="nomeCliente">--</span></div>
+      <div><strong>CPF:</strong> <span id="cpfCliente">--</span></div>
+      <div><strong>Email:</strong> <span id="emailCliente">--</span></div>
+      <div><strong>Celular:</strong> <span id="celularCliente">--</span></div>
+      <div><strong>Endereço:</strong> <span id="enderecoCliente">--</span></div>
+      <div><strong>Total da compra:</strong> <span id="valorTotal">--</span></div>
+    </div>
 
-    <div class="valor-total">
-      <h3>Valor Total da Compra:</h3>
-      <p><strong>R$ <span id="valorTotal">0,00</span></strong></p>
-    </div>
+    <!-- Cronômetro -->
+    <div class="cronometro" id="cronometro">05:00</div>
 
-    <h2>Pagamento via Pix</h2>
-    <p><strong>Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
-    <div class="cronometro" id="cronometro">05:00</div>
+    <!-- QR Code -->
+    <div class="qr-code">
+      <img src="assets/qrcode-pix.png" alt="QR Code Pix" style="width: 100%; height: 100%;">
+    </div>
 
-    <div class="qr-code">
-      <img src="assets/qrcode-pix.png" alt="QR Code Pix" style="width: 100%; height: 100%;">
-    </div>
+    <!-- Código Pix -->
+    <div class="pix-codigo-container">
+      <label for="pixCode">Código Pix Copia e Cola:</label>
+      <div class="pix-codigo-box">
+        <input type="text" id="pixCode" readonly value="00020126760014br.gov.bcb.pix0114..." />
+        <button id="copiarBtn">Copiar</button>
+      </div>
+    </div>
 
-    <div class="pix-codigo-container">
-      <label for="pixCode">Código Pix Copia e Cola:</label>
-      <div class="pix-codigo-box">
-        <input type="text" id="pixCode" readonly value="00020126760014br.gov.bcb.pix0114..." />
-        <button id="copiarBtn">Copiar</button>
-      </div>
-    </div>
+    <!-- Instruções -->
+    <div class="pix-instrucoes">
+      <h3>
+        <img src="assets/pix-logo.png" alt="Pix" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
+        Como pagar com Pix:
+      </h3>
+      <ol>
+        <li>Abra o app do seu banco ou carteira digital</li>
+        <li>Escolha a opção <strong>Pix Copia e Cola</strong></li>
+        <li>Cole o código acima</li>
+        <li>Confirme o pagamento</li>
+      </ol>
+    </div>
+  </main>
 
-    <div class="pix-instrucoes">
-      <h3>
-        <img src="assets/pix-logo.png" alt="Pix" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
-        Como pagar com Pix:
-      </h3>
-      <ol>
-        <li>Abra o app do seu banco ou carteira digital</li>
-        <li>Escolha a opção <strong>Pix Copia e Cola</strong></li>
-        <li>Cole o código acima</li>
-        <li>Confirme o pagamento</li>
-      </ol>
-    </div>
-  </main>
+  <!-- Scripts -->
+  <script>
+    // Cronômetro 5 minutos
+    let tempo = 5 * 60;
+    const display = document.getElementById("cronometro");
 
-  <script>
-    // Preencher dados do localStorage
-    const camposCliente = ["nome", "cpf", "email", "celular"];
-    const camposEndereco = ["cep", "rua", "numero", "bairro", "cidade", "estado", "complemento"];
+    function atualizarCronometro() {
+      const minutos = Math.floor(tempo / 60).toString().padStart(2, "0");
+      const segundos = (tempo % 60).toString().padStart(2, "0");
+      display.textContent = `${minutos}:${segundos}`;
+      if (tempo > 0) tempo--;
+    }
 
-    camposCliente.forEach(id => {
-      const valor = localStorage.getItem(id) || "Não informado";
-      document.getElementById(id).textContent = valor;
-    });
+    setInterval(atualizarCronometro, 1000);
 
-    camposEndereco.forEach(id => {
-      const valor = localStorage.getItem(id) || "Não informado";
-      document.getElementById(id).textContent = valor;
-    });
+    // Botão copiar código Pix
+    const btn = document.getElementById("copiarBtn");
+    const input = document.getElementById("pixCode");
 
-    // Calcular total dos produtos
-    let total = 0;
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    carrinho.forEach(item => {
-      total += parseFloat(item.preco) * (item.quantidade || 1);
-    });
-    document.getElementById("valorTotal").textContent = total.toFixed(2).replace(".", ",");
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(input.value).then(() => {
+        btn.classList.add("copiado");
+        btn.textContent = "Copiado!";
+        setTimeout(() => {
+          btn.classList.remove("copiado");
+          btn.textContent = "Copiar";
+        }, 2000);
+      });
+    });
 
-    // Cronômetro 5 minutos
-    let tempo = 5 * 60;
-    const display = document.getElementById("cronometro");
+    // Preencher dados do cliente
+    const nome = localStorage.getItem("nome") || "--";
+    const cpf = localStorage.getItem("cpf") || "--";
+    const email = localStorage.getItem("email") || "--";
+    const celular = localStorage.getItem("celular") || "--";
 
-    function atualizarCronometro() {
-      const minutos = Math.floor(tempo / 60).toString().padStart(2, "0");
-      const segundos = (tempo % 60).toString().padStart(2, "0");
-      display.textContent = `${minutos}:${segundos}`;
-      if (tempo > 0) tempo--;
-    }
+    const endereco = [
+      localStorage.getItem("rua"),
+      "Nº " + localStorage.getItem("numero"),
+      localStorage.getItem("bairro"),
+      localStorage.getItem("cidade"),
+      localStorage.getItem("estado"),
+      "CEP " + localStorage.getItem("cep")
+    ].filter(Boolean).join(", ");
 
-    setInterval(atualizarCronometro, 1000);
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const total = carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
+    const valorFormatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    // Botão copiar Pix
-    const btn = document.getElementById("copiarBtn");
-    const input = document.getElementById("pixCode");
-
-    btn.addEventListener("click", () => {
-      navigator.clipboard.writeText(input.value).then(() => {
-        btn.classList.add("copiado");
-        btn.textContent = "Copiado!";
-        setTimeout(() => {
-          btn.classList.remove("copiado");
-          btn.textContent = "Copiar";
-        }, 2000);
-      });
-    });
-  </script>
+    document.getElementById("nomeCliente").textContent = nome;
+    document.getElementById("cpfCliente").textContent = cpf;
+    document.getElementById("emailCliente").textContent = email;
+    document.getElementById("celularCliente").textContent = celular;
+    document.getElementById("enderecoCliente").textContent = endereco;
+    document.getElementById("valorTotal").textContent = valorFormatado;
+  </script>
 
 </body>
 </html>
