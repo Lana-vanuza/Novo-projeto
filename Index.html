@@ -113,7 +113,6 @@
   const mainImage = document.getElementById('mainImage');
 
   function trocarImagem(index) {
-    const mainImage = document.getElementById('mainImage');
     const lightboxImg = document.querySelector('#lightbox img');
 
     mainImage.classList.add('fade-out');
@@ -124,10 +123,10 @@
       if (lightboxImg) lightboxImg.src = imagens[index];
     }, 150);
 
-    setTimeout(() => {
-      mainImage.classList.remove('fade-out');
-      if (lightboxImg) lightboxImg.classList.remove('fade-out');
-    }, 300);
+    mainImage.onload = () => mainImage.classList.remove('fade-out');
+    if (lightboxImg) {
+      lightboxImg.onload = () => lightboxImg.classList.remove('fade-out');
+    }
 
     currentImageIndex = index;
 
@@ -136,7 +135,6 @@
     if (dots[index]) dots[index].classList.add('active');
   }
 
-  // Swipe em dispositivos móveis
   mainImage.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
   });
@@ -146,7 +144,6 @@
     handleSwipe(startX, endX);
   });
 
-  // Swipe com mouse (opcional)
   mainImage.addEventListener('mousedown', (e) => {
     startX = e.clientX;
   });
@@ -156,8 +153,8 @@
     handleSwipe(startX, endX);
   });
 
-  function handleSwipe(startX, endX) {
-    const deltaX = startX - endX;
+  function handleSwipe(start, end) {
+    const deltaX = start - end;
     if (Math.abs(deltaX) < 50) return;
 
     if (deltaX > 0) {
@@ -166,39 +163,57 @@
       currentImageIndex = (currentImageIndex - 1 + imagens.length) % imagens.length;
     }
 
-    function trocarImagem(index) {
-  const mainImage = document.getElementById('mainImage');
-  const lightboxImg = document.querySelector('#lightbox img');
-
-  // Aplica fade-out
-  mainImage.classList.add('fade-out');
-  if (lightboxImg) lightboxImg.classList.add('fade-out');
-
-  // Troca imagem após o fade-out
-  setTimeout(() => {
-    mainImage.src = imagens[index];
-    if (lightboxImg) lightboxImg.src = imagens[index];
-  }, 150);
-
-  // Espera a nova imagem carregar antes de remover fade-out
-  mainImage.onload = () => {
-    mainImage.classList.remove('fade-out');
-  };
-
-  if (lightboxImg) {
-    lightboxImg.onload = () => {
-      lightboxImg.classList.remove('fade-out');
-    };
+    trocarImagem(currentImageIndex);
   }
 
-  currentImageIndex = index;
+  // Lightbox
+  mainImage.addEventListener('click', function () {
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.style.position = 'fixed';
+    lightbox.style.top = 0;
+    lightbox.style.left = 0;
+    lightbox.style.width = '100vw';
+    lightbox.style.height = '100vh';
+    lightbox.style.background = 'rgba(0,0,0,0.8)';
+    lightbox.style.display = 'flex';
+    lightbox.style.justifyContent = 'center';
+    lightbox.style.alignItems = 'center';
+    lightbox.style.zIndex = 1000;
 
-  // Atualiza bolinhas
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach(dot => dot.classList.remove('active'));
-  if (dots[index]) dots[index].classList.add('active');
-}
+    const img = document.createElement('img');
+    img.src = imagens[currentImageIndex];
+    img.style.maxWidth = '90%';
+    img.style.maxHeight = '90%';
+    img.style.borderRadius = '10px';
+    img.style.transition = 'opacity 0.3s ease-in-out';
+    img.style.opacity = 1;
+
+    lightbox.appendChild(img);
+    document.body.appendChild(lightbox);
+
+    img.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    img.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      handleSwipe(startX, endX);
+    });
+
+    img.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+    });
+    img.addEventListener('mouseup', (e) => {
+      const endX = e.clientX;
+      handleSwipe(startX, endX);
+    });
+
+    lightbox.addEventListener('click', () => {
+      document.body.removeChild(lightbox);
+    });
+  });
 </script>
+
 
 </body>
 </html>
