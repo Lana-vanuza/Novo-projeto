@@ -99,7 +99,8 @@
       cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
     }
   </script>
-  <script>
+  
+<script>
   const imagens = [
     'assets/produto-a.jpeg',
     'assets/produto-b.jpeg',
@@ -109,15 +110,24 @@
   let currentImageIndex = 0;
 
   function trocarImagem(index) {
+    const mainImage = document.getElementById('mainImage');
+    mainImage.src = imagens[index];
     currentImageIndex = index;
-    document.getElementById('mainImage').src = imagens[index];
-    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-    document.querySelectorAll('.dot')[index].classList.add('active');
+
+    // Atualiza bolinhas
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach(dot => dot.classList.remove('active'));
+    if (dots[index]) dots[index].classList.add('active');
+
+    // Atualiza imagem ampliada se estiver aberta
+    const lightboxImg = document.querySelector('#lightbox img');
+    if (lightboxImg) {
+      lightboxImg.src = imagens[index];
+    }
   }
 
-  // Lightbox
+  // Lightbox para imagem
   document.getElementById('mainImage').addEventListener('click', function () {
-    const imageSrc = this.src;
     const lightbox = document.createElement('div');
     lightbox.id = 'lightbox';
     lightbox.style.position = 'fixed';
@@ -132,60 +142,57 @@
     lightbox.style.zIndex = 1000;
 
     const img = document.createElement('img');
-    img.src = imageSrc;
+    img.src = imagens[currentImageIndex];
     img.style.maxWidth = '90%';
     img.style.maxHeight = '90%';
     img.style.borderRadius = '10px';
-    img.style.touchAction = 'none'; // importante para swipe
+    img.style.transition = 'transform 0.3s ease';
 
     lightbox.appendChild(img);
     document.body.appendChild(lightbox);
 
-    // Fechar ao clicar
     lightbox.addEventListener('click', function () {
       document.body.removeChild(lightbox);
     });
 
-    // Swipe dentro do lightbox
-    addSwipeListeners(img);
+    // Adiciona swipe dentro do lightbox
+    let startX = 0;
+
+    img.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    img.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = startX - endX;
+
+      if (Math.abs(deltaX) < 50) return;
+
+      if (deltaX > 0) {
+        // Próxima imagem
+        currentImageIndex = (currentImageIndex + 1) % imagens.length;
+      } else {
+        // Imagem anterior
+        currentImageIndex = (currentImageIndex - 1 + imagens.length) % imagens.length;
+      }
+
+      trocarImagem(currentImageIndex);
+    });
   });
 
   // Swipe fora do lightbox (na imagem principal)
+  let startX = 0;
   const mainImage = document.getElementById('mainImage');
-  addSwipeListeners(mainImage);
 
-  function addSwipeListeners(element) {
-    let startX = 0;
-    let startY = 0;
+  mainImage.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
 
-    element.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-    });
-
-    element.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const endY = e.changedTouches[0].clientY;
-      handleSwipe(startX, startY, endX, endY);
-    });
-
-    element.addEventListener('mousedown', (e) => {
-      startX = e.clientX;
-      startY = e.clientY;
-    });
-
-    element.addEventListener('mouseup', (e) => {
-      const endX = e.clientX;
-      const endY = e.clientY;
-      handleSwipe(startX, startY, endX, endY);
-    });
-  }
-
-  function handleSwipe(startX, startY, endX, endY) {
+  mainImage.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
     const deltaX = startX - endX;
-    const deltaY = startY - endY;
 
-    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+    if (Math.abs(deltaX) < 50) return;
 
     if (deltaX > 0) {
       currentImageIndex = (currentImageIndex + 1) % imagens.length;
@@ -194,10 +201,14 @@
     }
 
     trocarImagem(currentImageIndex);
-  }
+  });
+
+  // Clique nas bolinhas
+  document.querySelectorAll('.dot').forEach((dot, index) => {
+    dot.addEventListener('click', () => trocarImagem(index));
+  });
 </script>
 
   
-
 </body>
 </html>
