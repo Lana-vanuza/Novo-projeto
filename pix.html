@@ -1,149 +1,191 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pagamento via Pix | Mercado Livre</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .pagamento-container {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagamento via Pix | Mercado Livre</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .pagamento-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
 
-    .cronometro {
-      font-size: 18px;
-      color: red;
-      margin-top: 5px;
-      font-weight: bold;
-    }
+    .info-cliente, .info-endereco, .valor-total {
+      text-align: left;
+      margin-bottom: 20px;
+      background: #f8f8f8;
+      padding: 15px;
+      border-radius: 8px;
+    }
 
-    .qr-code {
-      width: 240px;
-      height: 240px;
-      margin: 20px auto;
-      background: #eee;
-    }
+    .info-cliente h3,
+    .info-endereco h3,
+    .valor-total h3 {
+      margin-bottom: 8px;
+    }
 
-    .pix-codigo {
-      background: #f5f5f5;
-      padding: 10px;
-      border-radius: 8px;
-      word-break: break-all;
-      margin: 10px 0;
-    }
+    .cronometro {
+      font-size: 18px;
+      color: red;
+      margin-top: 5px;
+      font-weight: bold;
+    }
 
-    .btn-copiar {
-      background-color: #3483fa;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
+    .qr-code {
+      width: 240px;
+      height: 240px;
+      margin: 20px auto;
+      background: #eee;
+    }
 
-    .btn-copiar.copiado {
-      background-color: #28a745;
-    }
+    .pix-codigo {
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-word;
+      margin: 10px 0;
+    }
 
-    .instrucoes {
-      text-align: left;
-      margin-top: 30px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .btn-copiar {
+      background-color: #3483fa;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-    .instrucoes li {
-      margin-bottom: 8px;
-    }
-  </style>
+    .btn-copiar.copiado {
+      background-color: #28a745;
+    }
+
+    .pix-instrucoes {
+      text-align: left;
+      margin-top: 30px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pix-instrucoes li {
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body class="pix-page">
 
-  <header>
-    <a href="index.html"><img src="assets/logo-1.png" alt="Logo" class="logo" /></a>
-  </header>
+  <header>
+    <a href="index.html"><img src="assets/logo-1.png" alt="Logo" class="logo" /></a>
+  </header>
 
-  <main class="pagamento-container">
-    <h2>Pagamento via Pix</h2>
-    <p><strong>Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
-    <div class="cronometro" id="cronometro">05:00</div>
+  <main class="pagamento-container">
+    <div class="info-cliente" id="infoCliente">
+      <h3>Dados do Cliente</h3>
+      <p><strong>Nome:</strong> <span id="nome"></span></p>
+      <p><strong>CPF:</strong> <span id="cpf"></span></p>
+      <p><strong>E-mail:</strong> <span id="email"></span></p>
+      <p><strong>Celular:</strong> <span id="celular"></span></p>
+    </div>
 
-    <div class="qr-code">
-      <img src="assets/qrcode-pix.png" alt="QR Code Pix" style="width: 100%; height: 100%;">
-    </div>
+    <div class="info-endereco" id="infoEndereco">
+      <h3>Endereço de Entrega</h3>
+      <p><strong>CEP:</strong> <span id="cep"></span></p>
+      <p><strong>Rua:</strong> <span id="rua"></span>, <span id="numero"></span></p>
+      <p><strong>Bairro:</strong> <span id="bairro"></span></p>
+      <p><strong>Cidade/UF:</strong> <span id="cidade"></span> - <span id="estado"></span></p>
+      <p><strong>Complemento:</strong> <span id="complemento"></span></p>
+    </div>
 
-    <div class="pix-codigo-container">
-  <label for="pixCode">Código Pix Copia e Cola:</label>
-  <div class="pix-codigo-box">
-    <input type="text" id="pixCode" readonly value="00020126760014br.gov.bcb.pix0114..." />
-    <button id="copiarBtn">Copiar</button>
-  </div>
-</div>
+    <div class="valor-total">
+      <h3>Valor Total da Compra:</h3>
+      <p><strong>R$ <span id="valorTotal">0,00</span></strong></p>
+    </div>
 
-<div class="pix-instrucoes">
-  <h3>
-  <img src="assets/pix-logo.png" alt="Pix" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
-  Como pagar com Pix:
-</h3>
+    <h2>Pagamento via Pix</h2>
+    <p><strong>Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
+    <div class="cronometro" id="cronometro">05:00</div>
 
-  <ol>
-    <li>Abra o app do seu banco ou carteira digital</li>
-    <li>Escolha a opção <strong>Pix Copia e Cola</strong></li>
-    <li>Cole o código acima</li>
-    <li>Confirme o pagamento</li>
-  </ol>
-</div>
+    <div class="qr-code">
+      <img src="assets/qrcode-pix.png" alt="QR Code Pix" style="width: 100%; height: 100%;">
+    </div>
 
-  </main>
+    <div class="pix-codigo-container">
+      <label for="pixCode">Código Pix Copia e Cola:</label>
+      <div class="pix-codigo-box">
+        <input type="text" id="pixCode" readonly value="00020126760014br.gov.bcb.pix0114..." />
+        <button id="copiarBtn">Copiar</button>
+      </div>
+    </div>
 
-  <script>
-    // Cronômetro 5 minutos
-    let tempo = 5 * 60; // 5 minutos
-    const display = document.getElementById("cronometro");
+    <div class="pix-instrucoes">
+      <h3>
+        <img src="assets/pix-logo.png" alt="Pix" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
+        Como pagar com Pix:
+      </h3>
+      <ol>
+        <li>Abra o app do seu banco ou carteira digital</li>
+        <li>Escolha a opção <strong>Pix Copia e Cola</strong></li>
+        <li>Cole o código acima</li>
+        <li>Confirme o pagamento</li>
+      </ol>
+    </div>
+  </main>
 
-    function atualizarCronometro() {
-      const minutos = Math.floor(tempo / 60).toString().padStart(2, "0");
-      const segundos = (tempo % 60).toString().padStart(2, "0");
-      display.textContent = `${minutos}:${segundos}`;
-      if (tempo > 0) tempo--;
-    }
+  <script>
+    // Preencher dados do localStorage
+    const camposCliente = ["nome", "cpf", "email", "celular"];
+    const camposEndereco = ["cep", "rua", "numero", "bairro", "cidade", "estado", "complemento"];
 
-    setInterval(atualizarCronometro, 1000);
-
-    // Botão copiar Pix
-    function copiarCodigoPix() {
-      const codigo = document.getElementById("codigoPix").textContent;
-      navigator.clipboard.writeText(codigo).then(() => {
-        const botao = document.getElementById("copiarBtn");
-        botao.textContent = "✅ Código copiado com sucesso!";
-        botao.classList.add("copiado");
-        setTimeout(() => {
-          botao.textContent = "Copiar código Pix";
-          botao.classList.remove("copiado");
-        }, 4000);
-      });
-    }
-  </script>
-<script>
-  const btn = document.getElementById("copiarBtn");
-  const input = document.getElementById("pixCode");
-
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(input.value).then(() => {
-      btn.classList.add("copiado");
-      btn.textContent = "Copiado!";
-      setTimeout(() => {
-        btn.classList.remove("copiado");
-        btn.textContent = "Copiar";
-      }, 2000);
+    camposCliente.forEach(id => {
+      const valor = localStorage.getItem(id) || "Não informado";
+      document.getElementById(id).textContent = valor;
     });
-  });
-</script>
-  
+
+    camposEndereco.forEach(id => {
+      const valor = localStorage.getItem(id) || "Não informado";
+      document.getElementById(id).textContent = valor;
+    });
+
+    // Calcular total dos produtos
+    let total = 0;
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    carrinho.forEach(item => {
+      total += parseFloat(item.preco) * (item.quantidade || 1);
+    });
+    document.getElementById("valorTotal").textContent = total.toFixed(2).replace(".", ",");
+
+    // Cronômetro 5 minutos
+    let tempo = 5 * 60;
+    const display = document.getElementById("cronometro");
+
+    function atualizarCronometro() {
+      const minutos = Math.floor(tempo / 60).toString().padStart(2, "0");
+      const segundos = (tempo % 60).toString().padStart(2, "0");
+      display.textContent = `${minutos}:${segundos}`;
+      if (tempo > 0) tempo--;
+    }
+
+    setInterval(atualizarCronometro, 1000);
+
+    // Botão copiar Pix
+    const btn = document.getElementById("copiarBtn");
+    const input = document.getElementById("pixCode");
+
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(input.value).then(() => {
+        btn.classList.add("copiado");
+        btn.textContent = "Copiado!";
+        setTimeout(() => {
+          btn.classList.remove("copiado");
+          btn.textContent = "Copiar";
+        }, 2000);
+      });
+    });
+  </script>
+
 </body>
 </html>
