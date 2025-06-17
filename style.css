@@ -375,36 +375,78 @@ body.checkout-page label {
   font-size: 14px;
 }
 /* Instruções do Pix */
-.instrucoes {
-  background-color: #fff8c4;
-  padding: 20px;
-  margin-top: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* Bloco código Pix */
+.pix-codigo-container {
+  margin-top: 30px;
 }
 
-.instrucoes h3 {
-  margin-bottom: 12px;
-  font-size: 18px;
+.pix-codigo-container label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
   color: #333;
 }
 
-.instrucoes ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.instrucoes li {
-  font-size: 15px;
-  margin-bottom: 10px;
+.pix-codigo-box {
   display: flex;
+  gap: 10px;
+  background-color: #f2f2f2;
+  padding: 12px;
+  border-radius: 8px;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-.instrucoes li::before {
-  content: "💡";
-  margin-right: 8px;
+.pix-codigo-box input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: monospace;
+  color: #333;
+  outline: none;
 }
+
+.pix-codigo-box button {
+  background-color: #3483fa;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pix-codigo-box button.copiado {
+  background-color: #00a650;
+}
+
+/* Instruções mais sérias */
+.pix-instrucoes {
+  background-color: #f9f9f9;
+  padding: 25px 20px;
+  border-radius: 8px;
+  margin-top: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pix-instrucoes h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.pix-instrucoes ol {
+  padding-left: 20px;
+  color: #444;
+}
+
+.pix-instrucoes li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
 
 /* Ajuste responsivo */
 @media (max-width: 600px) {
