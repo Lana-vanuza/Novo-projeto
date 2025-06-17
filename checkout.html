@@ -6,28 +6,55 @@
   <title>Finalizar Compra | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="cep-page">
-  <a href="index.html" class="logo-link">
-    <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
-  </a>
+<body class="checkout-page">
 
-  <div class="cep-container">
-    <h2>Preencha seus dados para a nota fiscal</h2>
-    <form action="pix.html" method="GET">
-      <label for="nome">Nome completo:</label>
-      <input type="text" id="nome" required />
+  <header>
+    <div class="header-content" style="background-color: #ffe600; padding: 12px 0; display: flex; justify-content: center;">
+      <a href="index.html">
+        <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" style="height: 50px; cursor: pointer;" />
+      </a>
+    </div>
+  </header>
 
-      <label for="cpf">CPF:</label>
-      <input type="text" id="cpf" required />
+  <main class="container">
+    <h2>Revisão do Pedido</h2>
 
-      <label for="email">E-mail:</label>
-      <input type="text" id="email" required />
+    <div class="endereco-entrega">
+      <h3>Endereço de Entrega</h3>
+      <p id="enderecoText">Carregando endereço...</p>
+      <a href="cep.html">Alterar endereço</a>
+    </div>
 
-      <label for="telefone">Telefone:</label>
-      <input type="text" id="telefone" required />
+    <!-- Aqui podem entrar mais detalhes do pedido -->
 
-      <button type="submit">Ir para pagamento</button>
-    </form>
-  </div>
+    <button id="finalizarBtn">Finalizar Compra</button>
+  </main>
+
+  <script>
+    // Puxa o endereço salvo do localStorage e mostra na página
+    function mostrarEndereco() {
+      const cep = localStorage.getItem("cep") || "";
+      const cidade = localStorage.getItem("cidade") || "";
+      const rua = localStorage.getItem("rua") || "";
+      const numero = localStorage.getItem("numero") || "";
+      const bairro = localStorage.getItem("bairro") || "";
+      const complemento = localStorage.getItem("complemento") || "";
+
+      if(cep && cidade && rua && numero && bairro) {
+        const enderecoCompleto = `${rua}, ${numero}${complemento ? ', ' + complemento : ''} - ${bairro}, ${cidade} - CEP: ${cep}`;
+        document.getElementById("enderecoText").textContent = enderecoCompleto;
+      } else {
+        document.getElementById("enderecoText").textContent = "Nenhum endereço cadastrado.";
+      }
+    }
+
+    mostrarEndereco();
+
+    document.getElementById("finalizarBtn").addEventListener("click", () => {
+      alert("Compra finalizada com sucesso!");
+      // Aqui você pode limpar o carrinho, localStorage etc se quiser
+    });
+  </script>
+
 </body>
 </html>
