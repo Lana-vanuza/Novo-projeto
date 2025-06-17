@@ -12,7 +12,7 @@ body {
   line-height: 1.4;
 }
 
-/* HEADER */
+/* HEADER PADRÃO (não usado no checkout e cep) */
 header {
   background-color: #ffe600;
   width: 100%;
@@ -93,8 +93,6 @@ header .logo {
   font-size: 16px;
   color: #000;
 }
-
-
 
 /* CONTAINER PRINCIPAL */
 .produto-container {
@@ -214,7 +212,6 @@ header .logo {
   opacity: 0 !important;
 }
 
-
 /* Destaque oferta do dia */
 .oferta-dia {
   margin-top: 12px;
@@ -297,92 +294,9 @@ header .logo {
   color: #333;
 }
 
-/* RESPONSIVO */
-@media (max-width: 600px) {
-  .produto-container {
-    margin: 10px 10px 20px 10px;
-    padding: 15px;
-  }
+/* === ESTILOS PARA PÁGINAS CEP E CHECKOUT */
 
-  header {
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .header-center {
-    max-width: 100%;
-  }
-
-  .busca-input {
-    max-width: 100%;
-  }
-
-  .btn-comprar {
-    font-size: 14px;
-    padding: 12px 0;
-  }
-}
-
-/* === CEP PAGE === */
-/* Estilo específico para a página de CEP */
-
-body.cep-page {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background-color: #f5f5f5;
-}
-
-.cep-container {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.cep-container h2 {
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #333;
-  text-align: center;
-}
-
-.cep-container label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  color: #333;
-}
-
-.cep-container input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.cep-container button {
-  margin-top: 20px;
-  width: 100%;
-  padding: 12px;
-  background-color: #ffe600;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #000;
-  transition: background-color 0.3s;
-}
-
-.cep-container button:hover {
-  background-color: #ffdb00;
-}
-
-/* === Estilo para header das páginas auxiliares === */
+/* Headers da página CEP e CHECKOUT */
 body.cep-page header,
 body.checkout-page header,
 body.pix-page header {
@@ -390,7 +304,7 @@ body.pix-page header {
   padding: 12px 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* centraliza o logo */
   flex-wrap: wrap;
   gap: 10px;
 }
@@ -404,125 +318,68 @@ body.pix-page header .logo {
   cursor: pointer;
 }
 
-/* Container centralizado */
+/* Container principal das páginas CEP e CHECKOUT */
 body.cep-page .cep-container,
 body.checkout-page main.container,
 body.pix-page main.container {
   max-width: 420px;
   margin: 40px auto 60px auto;
-  padding: 0 20px;
+  padding: 20px 20px 30px 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
-/* Botão de pagar */
-body.checkout-page button,
-body.pix-page .btn-pagar {
-  background-color: #3483fa;
-  color: white;
-  border: none;
-  padding: 14px 0;
+/* Inputs e botões padrão */
+body.cep-page input,
+body.cep-page select,
+body.checkout-page input,
+body.checkout-page select {
   width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
+  box-sizing: border-box;
+}
+
+body.cep-page button,
+body.checkout-page button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  background-color: #3483fa;
+  border: none;
   border-radius: 6px;
   font-weight: 700;
   font-size: 16px;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px;
 }
 
-body.checkout-page button:hover,
-body.pix-page .btn-pagar:hover {
+body.cep-page button:hover,
+body.checkout-page button:hover {
   background-color: #2769c6;
 }
 
-/* === PIX TIMER === */
-body.pix-page .timer {
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: #e65100;
-  text-align: center;
-  margin: 0 auto 25px auto;
+/* Labels */
+body.cep-page label,
+body.checkout-page label {
+  font-weight: 600;
+  color: #333;
   display: block;
-  max-width: 300px;
-  user-select: none;
+  margin-top: 20px;
+  font-size: 14px;
 }
 
-/* Código Pix */
-body.pix-page .pix-code-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fffbcc;
-  border: 1.8px dashed #e65100;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-family: monospace;
-  font-size: 1.1rem;
-  user-select: all;
-  margin-bottom: 25px;
-  word-break: break-word;
-}
-
-body.pix-page .pix-code-text {
-  flex-grow: 1;
-  margin-right: 15px;
-  overflow-wrap: anywhere;
-  user-select: all;
-}
-
-body.pix-page .btn-copy {
-  background-color: #e65100;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 14px;
-  cursor: pointer;
-  font-weight: 700;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  white-space: nowrap;
-}
-
-body.pix-page .btn-copy:hover {
-  background-color: #b34100;
-}
-
-body.pix-page .btn-pagar-pix {
-  background-color: #00a650;
-  color: white;
-  font-weight: 700;
-  padding: 16px 0;
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1.25rem;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-}
-
-body.pix-page .btn-pagar-pix:hover {
-  background-color: #007a3d;
-}
-
-/* === RESPONSIVO PIX === */
-@media (max-width: 480px) {
+/* Ajuste responsivo */
+@media (max-width: 600px) {
   body.cep-page .cep-container,
-  body.checkout-page main.container,
-  body.pix-page main.container {
+  body.checkout-page main.container {
     margin: 20px 15px 40px 15px;
     padding: 15px;
-  }
-
-  body.pix-page .pix-code-wrapper {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  body.pix-page .btn-copy {
-    width: 100%;
   }
 }
