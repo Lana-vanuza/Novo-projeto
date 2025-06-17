@@ -13,6 +13,26 @@
       text-align: center;
     }
 
+    .info-box {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .info-box p {
+      margin: 4px 0;
+    }
+
     .cronometro {
       font-size: 18px;
       color: red;
@@ -29,29 +49,13 @@
 
     .pix-codigo {
       background: #f5f5f5;
-      padding: 16px;
+      padding: 10px;
       border-radius: 8px;
-      margin: 20px 0;
-      text-align: left;
-      font-size: 14px;
-      line-height: 1.6;
+      word-break: break-all;
+      margin: 10px 0;
     }
 
-    .pix-codigo-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .pix-codigo-box input {
-      flex: 1;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    #copiarBtn {
+    .btn-copiar {
       background-color: #3483fa;
       color: white;
       padding: 10px 16px;
@@ -62,18 +66,18 @@
       transition: background-color 0.3s;
     }
 
-    #copiarBtn.copiado {
+    .btn-copiar.copiado {
       background-color: #28a745;
     }
 
-    .pix-instrucoes {
+    .instrucoes {
       text-align: left;
       margin-top: 30px;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    .pix-instrucoes li {
+    .instrucoes li {
       margin-bottom: 8px;
     }
   </style>
@@ -86,37 +90,34 @@
 
   <main class="pagamento-container">
     <h2>Pagamento via Pix</h2>
-    <p><strong>Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
 
-    <!-- Dados do cliente -->
-    <div class="pix-codigo">
-      <strong>Dados do cliente:</strong><br><br>
-      <div><strong>Nome:</strong> <span id="nomeCliente">--</span></div>
-      <div><strong>CPF:</strong> <span id="cpfCliente">--</span></div>
-      <div><strong>Email:</strong> <span id="emailCliente">--</span></div>
-      <div><strong>Celular:</strong> <span id="celularCliente">--</span></div>
-      <div><strong>Endereço:</strong> <span id="enderecoCliente">--</span></div>
-      <div><strong>Total da compra:</strong> <span id="valorTotal">--</span></div>
+    <div class="info-box" id="dadosCliente">
+      <h3>Dados do Cliente</h3>
+      <p><strong>Nome:</strong> <span id="nomeCliente">--</span></p>
+      <p><strong>E-mail:</strong> <span id="emailCliente">--</span></p>
+      <p><strong>Celular:</strong> <span id="celularCliente">--</span></p>
+      <p><strong>Endereço:</strong> <span id="enderecoCliente">--</span></p>
+      <p><strong>Valor Total:</strong> R$ <span id="valorTotal">0,00</span></p>
     </div>
 
-    <!-- Cronômetro -->
+    <div style="margin-top: 10px; margin-bottom: -10px;">
+      <p><strong style="color:#222;">Oferta válida por 5 minutos. Pague antes que acabe!</strong></p>
+    </div>
+
     <div class="cronometro" id="cronometro">05:00</div>
 
-    <!-- QR Code -->
     <div class="qr-code">
       <img src="assets/qrcode-pix.png" alt="QR Code Pix" style="width: 100%; height: 100%;">
     </div>
 
-    <!-- Código Pix -->
     <div class="pix-codigo-container">
       <label for="pixCode">Código Pix Copia e Cola:</label>
       <div class="pix-codigo-box">
         <input type="text" id="pixCode" readonly value="00020126760014br.gov.bcb.pix0114..." />
-        <button id="copiarBtn">Copiar</button>
+        <button id="copiarBtn" class="btn-copiar">Copiar</button>
       </div>
     </div>
 
-    <!-- Instruções -->
     <div class="pix-instrucoes">
       <h3>
         <img src="assets/pix-logo.png" alt="Pix" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
@@ -131,7 +132,6 @@
     </div>
   </main>
 
-  <!-- Scripts -->
   <script>
     // Cronômetro 5 minutos
     let tempo = 5 * 60;
@@ -146,7 +146,7 @@
 
     setInterval(atualizarCronometro, 1000);
 
-    // Botão copiar código Pix
+    // Copiar código Pix
     const btn = document.getElementById("copiarBtn");
     const input = document.getElementById("pixCode");
 
@@ -163,29 +163,25 @@
 
     // Preencher dados do cliente
     const nome = localStorage.getItem("nome") || "--";
-    const cpf = localStorage.getItem("cpf") || "--";
     const email = localStorage.getItem("email") || "--";
-    const celular = localStorage.getItem("celular") || "--";
+    const celular = localStorage.getItem("celular") || localStorage.getItem("telefone") || "--";
 
-    const endereco = [
-      localStorage.getItem("rua"),
-      "Nº " + localStorage.getItem("numero"),
-      localStorage.getItem("bairro"),
-      localStorage.getItem("cidade"),
-      localStorage.getItem("estado"),
-      "CEP " + localStorage.getItem("cep")
-    ].filter(Boolean).join(", ");
+    const rua = localStorage.getItem("rua") || "";
+    const numero = localStorage.getItem("numero") || "";
+    const bairro = localStorage.getItem("bairro") || "";
+    const cidade = localStorage.getItem("cidade") || "";
+    const estado = localStorage.getItem("estado") || "";
+    const complemento = localStorage.getItem("complemento") || "";
 
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    const total = carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
-    const valorFormatado = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const endereco = `${rua}, ${numero}${complemento ? " - " + complemento : ""} - ${bairro}, ${cidade} - ${estado}`;
+
+    const valorTotal = localStorage.getItem("valorTotal") || "0,00";
 
     document.getElementById("nomeCliente").textContent = nome;
-    document.getElementById("cpfCliente").textContent = cpf;
     document.getElementById("emailCliente").textContent = email;
     document.getElementById("celularCliente").textContent = celular;
     document.getElementById("enderecoCliente").textContent = endereco;
-    document.getElementById("valorTotal").textContent = valorFormatado;
+    document.getElementById("valorTotal").textContent = valorTotal;
   </script>
 
 </body>
