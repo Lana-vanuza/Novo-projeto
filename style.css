@@ -71,7 +71,8 @@ header .logo {
   font-size: 14px;
 }
 
-.cep-bar a, .cep-bar p {
+.cep-bar a,
+.cep-bar p {
   color: #333;
   font-weight: bold;
   text-decoration: none;
@@ -90,7 +91,7 @@ header .logo {
   margin: 20px auto;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
 
@@ -156,7 +157,7 @@ header .logo {
   width: 100%;
   border-radius: 6px;
   display: block;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Destaque oferta do dia */
@@ -169,7 +170,7 @@ header .logo {
   padding: 6px 12px;
   border-radius: 4px;
   width: fit-content;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   user-select: none;
 }
 
@@ -267,26 +268,82 @@ header .logo {
   }
 }
 
-/* ===== Estilo cep.html, checkout.html e pix.html ===== */
+/* === CEP PAGE === */
+.cep-container {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
 
+.cep-container h2 {
+  font-weight: 700;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cep-container label {
+  display: block;
+  font-weight: 600;
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+.cep-container input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.cep-container button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #3483fa;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cep-container button:hover {
+  background-color: #2769c6;
+}
+
+/* === Estilo para header das páginas auxiliares === */
 body.cep-page header,
 body.checkout-page header,
 body.pix-page header {
   background-color: #ffe600;
   padding: 12px 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 body.cep-page header .logo,
 body.checkout-page header .logo,
 body.pix-page header .logo {
   height: 40px;
-  width: auto;
+  max-height: 50px;
+  object-fit: contain;
+  cursor: pointer;
 }
 
-/* Container centralizado para formularios */
+/* Container centralizado */
 body.cep-page .cep-container,
 body.checkout-page main.container,
 body.pix-page main.container {
@@ -295,11 +352,11 @@ body.pix-page main.container {
   padding: 0 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
-/* Estilo para botão pagar */
+/* Botão de pagar */
 body.checkout-page button,
 body.pix-page .btn-pagar {
   background-color: #3483fa;
@@ -320,20 +377,19 @@ body.pix-page .btn-pagar:hover {
   background-color: #2769c6;
 }
 
-/* ===== PIX - Destacar cronômetro ===== */
+/* === PIX TIMER === */
 body.pix-page .timer {
   font-size: 2.8rem;
   font-weight: 900;
-  color: #d32f2f;
+  color: #e65100;
   text-align: center;
-  margin-bottom: 25px;
-  padding: 12px;
-  background-color: #fff3cd;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 25px auto;
+  display: block;
+  max-width: 300px;
+  user-select: none;
 }
 
-/* Código PIX */
+/* Código Pix */
 body.pix-page .pix-code-wrapper {
   display: flex;
   align-items: center;
@@ -391,6 +447,21 @@ body.pix-page .btn-pagar-pix:hover {
   background-color: #007a3d;
 }
 
-/* Responsivo PIX */
+/* === RESPONSIVO PIX === */
 @media (max-width: 480px) {
-  body.cep-p
+  body.cep-page .cep-container,
+  body.checkout-page main.container,
+  body.pix-page main.container {
+    margin: 20px 15px 40px 15px;
+    padding: 15px;
+  }
+
+  body.pix-page .pix-code-wrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  body.pix-page .btn-copy {
+    width: 100%;
+  }
+}
