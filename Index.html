@@ -166,48 +166,38 @@
       currentImageIndex = (currentImageIndex - 1 + imagens.length) % imagens.length;
     }
 
-    trocarImagem(currentImageIndex);
+    function trocarImagem(index) {
+  const mainImage = document.getElementById('mainImage');
+  const lightboxImg = document.querySelector('#lightbox img');
+
+  // Aplica fade-out
+  mainImage.classList.add('fade-out');
+  if (lightboxImg) lightboxImg.classList.add('fade-out');
+
+  // Troca imagem após o fade-out
+  setTimeout(() => {
+    mainImage.src = imagens[index];
+    if (lightboxImg) lightboxImg.src = imagens[index];
+  }, 150);
+
+  // Espera a nova imagem carregar antes de remover fade-out
+  mainImage.onload = () => {
+    mainImage.classList.remove('fade-out');
+  };
+
+  if (lightboxImg) {
+    lightboxImg.onload = () => {
+      lightboxImg.classList.remove('fade-out');
+    };
   }
 
-  // Lightbox com clique
-  mainImage.addEventListener('click', function () {
-    const imageSrc = this.src;
-    const lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.style.position = 'fixed';
-    lightbox.style.top = 0;
-    lightbox.style.left = 0;
-    lightbox.style.width = '100vw';
-    lightbox.style.height = '100vh';
-    lightbox.style.background = 'rgba(0,0,0,0.8)';
-    lightbox.style.display = 'flex';
-    lightbox.style.justifyContent = 'center';
-    lightbox.style.alignItems = 'center';
-    lightbox.style.zIndex = 1000;
+  currentImageIndex = index;
 
-    const img = document.createElement('img');
-    img.src = imageSrc;
-    img.style.maxWidth = '90%';
-    img.style.maxHeight = '90%';
-    img.style.borderRadius = '10px';
-
-    lightbox.appendChild(img);
-    document.body.appendChild(lightbox);
-
-    lightbox.addEventListener('click', function () {
-      document.body.removeChild(lightbox);
-    });
-
-    // Swipe no lightbox também
-    img.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    img.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      handleSwipe(startX, endX);
-    });
-  });
+  // Atualiza bolinhas
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach(dot => dot.classList.remove('active'));
+  if (dots[index]) dots[index].classList.add('active');
+}
 </script>
 
 </body>
