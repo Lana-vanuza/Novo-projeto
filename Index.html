@@ -51,9 +51,18 @@
         <span class="total">+10 mil vendidos</span>
       </div>
 
-      <section class="galeria">
-        <img src="assets/produto-a.jpeg" alt="Galaxy A25" />
-      </section>
+<!-- Galeria de imagens estilo Mercado Livre -->
+<section class="product-gallery">
+  <div class="main-image">
+    <img src="assets/produto-a.jpeg" alt="Galaxy A25" id="mainImage" />
+  </div>
+  <div class="thumbnail-carousel">
+    <img src="assets/produto-a.jpeg" onclick="changeImage(this)" />
+    <img src="assets/produto-b.jpeg" onclick="changeImage(this)" />
+    <img src="assets/produto-c.jpeg" onclick="changeImage(this)" />
+  </div>
+</section>
+
       <div class="oferta-dia">OFERTA DO DIA</div>
 
       <div class="preco-detalhe">
@@ -90,5 +99,42 @@
       cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
     }
   </script>
+  <script>
+  function changeImage(el) {
+    const mainImage = document.getElementById('mainImage');
+    mainImage.src = el.src;
+  }
+
+  // Lightbox: clicar na imagem principal abre em tela cheia
+  document.getElementById('mainImage').addEventListener('click', function () {
+    const imageSrc = this.src;
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.style.position = 'fixed';
+    lightbox.style.top = 0;
+    lightbox.style.left = 0;
+    lightbox.style.width = '100vw';
+    lightbox.style.height = '100vh';
+    lightbox.style.background = 'rgba(0,0,0,0.8)';
+    lightbox.style.display = 'flex';
+    lightbox.style.justifyContent = 'center';
+    lightbox.style.alignItems = 'center';
+    lightbox.style.zIndex = 1000;
+
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.style.maxWidth = '90%';
+    img.style.maxHeight = '90%';
+    img.style.borderRadius = '10px';
+
+    lightbox.appendChild(img);
+    document.body.appendChild(lightbox);
+
+    lightbox.addEventListener('click', function () {
+      document.body.removeChild(lightbox);
+    });
+  });
+</script>
+
 </body>
 </html>
