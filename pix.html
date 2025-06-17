@@ -125,6 +125,21 @@
       });
     }
   </script>
+<script>
+  const btn = document.getElementById("copiarBtn");
+  const input = document.getElementById("pixCode");
 
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(input.value).then(() => {
+      btn.classList.add("copiado");
+      btn.textContent = "Copiado!";
+      setTimeout(() => {
+        btn.classList.remove("copiado");
+        btn.textContent = "Copiar";
+      }, 2000);
+    });
+  });
+</script>
+  
 </body>
 </html>
