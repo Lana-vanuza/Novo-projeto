@@ -106,16 +106,16 @@
     'assets/produto-c.jpeg'
   ];
 
-  function trocarImagem(index) {
-    const mainImage = document.getElementById('mainImage');
-    mainImage.src = imagens[index];
+  let currentImageIndex = 0;
 
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
+  function trocarImagem(index) {
+    currentImageIndex = index;
+    document.getElementById('mainImage').src = imagens[index];
+    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+    document.querySelectorAll('.dot')[index].classList.add('active');
   }
 
-  // Lightbox para imagem
+  // Lightbox
   document.getElementById('mainImage').addEventListener('click', function () {
     const imageSrc = this.src;
     const lightbox = document.createElement('div');
@@ -136,54 +136,67 @@
     img.style.maxWidth = '90%';
     img.style.maxHeight = '90%';
     img.style.borderRadius = '10px';
+    img.style.touchAction = 'none'; // importante para swipe
 
     lightbox.appendChild(img);
     document.body.appendChild(lightbox);
 
+    // Fechar ao clicar
     lightbox.addEventListener('click', function () {
       document.body.removeChild(lightbox);
     });
-  });
-</script>
-<script>
-  let startX = 0;
-  let currentImageIndex = 0;
 
+    // Swipe dentro do lightbox
+    addSwipeListeners(img);
+  });
+
+  // Swipe fora do lightbox (na imagem principal)
   const mainImage = document.getElementById('mainImage');
+  addSwipeListeners(mainImage);
 
-  mainImage.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-  });
+  function addSwipeListeners(element) {
+    let startX = 0;
+    let startY = 0;
 
-  mainImage.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    handleSwipe(startX, endX);
-  });
+    element.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    });
 
-  mainImage.addEventListener('mousedown', (e) => {
-    startX = e.clientX;
-  });
+    element.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      handleSwipe(startX, startY, endX, endY);
+    });
 
-  mainImage.addEventListener('mouseup', (e) => {
-    const endX = e.clientX;
-    handleSwipe(startX, endX);
-  });
+    element.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      startY = e.clientY;
+    });
 
-  function handleSwipe(start, end) {
-    const deltaX = start - end;
-    if (Math.abs(deltaX) < 50) return; // ignore toques leves
+    element.addEventListener('mouseup', (e) => {
+      const endX = e.clientX;
+      const endY = e.clientY;
+      handleSwipe(startX, startY, endX, endY);
+    });
+  }
+
+  function handleSwipe(startX, startY, endX, endY) {
+    const deltaX = startX - endX;
+    const deltaY = startY - endY;
+
+    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
 
     if (deltaX > 0) {
-      // swipe para esquerda → próxima imagem
       currentImageIndex = (currentImageIndex + 1) % imagens.length;
     } else {
-      // swipe para direita → imagem anterior
       currentImageIndex = (currentImageIndex - 1 + imagens.length) % imagens.length;
     }
 
     trocarImagem(currentImageIndex);
   }
 </script>
+
   
 
 </body>
