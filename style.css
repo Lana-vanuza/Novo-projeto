@@ -188,12 +188,11 @@ header .logo {
 }
 
 /* Galeria */
-#mainImage,
-#lightbox img {
+#mainImage {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
-  will-change: opacity;
 }
+
 .fade-in {
   opacity: 1;
   transition: opacity 0.3s ease-in;
@@ -203,6 +202,7 @@ header .logo {
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
+
 
 /* Destaque oferta do dia */
 .oferta-dia {
