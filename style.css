@@ -374,6 +374,37 @@ body.checkout-page label {
   margin-top: 20px;
   font-size: 14px;
 }
+/* Instruções do Pix */
+.instrucoes {
+  background-color: #fff8c4;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.instrucoes h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #333;
+}
+
+.instrucoes ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.instrucoes li {
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.instrucoes li::before {
+  content: "💡";
+  margin-right: 8px;
+}
 
 /* Ajuste responsivo */
 @media (max-width: 600px) {
