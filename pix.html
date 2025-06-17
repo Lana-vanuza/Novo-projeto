@@ -3,27 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagamento via PIX | Mercado Livre</title>
+  <title>Pagamento via PIX | LibreMerc</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .pix-container {
       text-align: center;
       padding: 20px;
     }
+    .timer {
+      font-size: 16px;
+      color: #ff0000;
+      margin-bottom: 10px;
+    }
     .pix-container img {
-      width: 250px;
+      width: 220px;
       margin-bottom: 20px;
     }
     .pix-code {
-      word-break: break-all;
+      word-break: break-word;
       background: #f5f5f5;
       padding: 10px;
       border-radius: 5px;
+      margin: 10px auto;
+      max-width: 90%;
     }
-    .timer {
-      font-size: 18px;
+    .copy-btn {
       margin-top: 10px;
-      color: #ff0000;
+      padding: 10px 20px;
+      background-color: #3483fa;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background-color: #2968c8;
     }
   </style>
 </head>
@@ -38,16 +52,18 @@
 
   <main class="container">
     <div class="pix-container">
+      <p class="timer" id="timer">Tempo restante: 15:00</p>
       <h2>Escaneie o QR Code abaixo para pagar</h2>
       <img src="assets/qrcode-pix.png" alt="QR Code PIX" />
       <p class="pix-code" id="pixCode">
         00020101021126580014BR.GOV.BCB.PIX0136506341452345698415204000053039865802BR5925LOJA LIBREMERC LTDA6009SAO PAULO62240520LIBREMERC-PIX-20236270404A8B
       </p>
-      <p class="timer" id="timer">Tempo restante: 15:00</p>
+      <button class="copy-btn" onclick="copyPix()">Copiar código PIX</button>
     </div>
   </main>
 
   <script>
+    // Cronômetro regressivo
     let timeLeft = 15 * 60;
     const timerEl = document.getElementById("timer");
 
@@ -64,6 +80,16 @@
     }
 
     updateTimer();
+
+    // Função para copiar o código PIX
+    function copyPix() {
+      const pixCode = document.getElementById("pixCode").textContent;
+      navigator.clipboard.writeText(pixCode).then(() => {
+        alert("Código PIX copiado!");
+      }).catch(err => {
+        alert("Erro ao copiar o código.");
+      });
+    }
   </script>
 </body>
 </html>
