@@ -6,121 +6,98 @@
   <title>Pagamento via Pix | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Estilo extra só para o pix */
-
-    .pix-container {
+    .pix-box {
+      max-width: 400px;
+      margin: 30px auto;
+      background-color: #fffbe6;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .pix-box h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
     }
 
     .timer {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #e65100;
-      margin-bottom: 25px;
+      font-size: 18px;
+      color: red;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
 
-    .pix-qrcode {
-      max-width: 250px;
-      margin: 0 auto 25px auto;
-      border: 3px solid #ffd700;
-      border-radius: 15px;
-      padding: 10px;
-      background: white;
-      box-shadow: 0 0 15px #ffd700aa;
+    .pix-box img {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .pix-code {
-      font-family: monospace;
-      background: #fffbcc;
-      border: 1.5px dashed #e65100;
-      padding: 12px 18px;
-      border-radius: 10px;
-      user-select: all;
-      cursor: pointer;
-      display: inline-block;
-      font-size: 1rem;
-      margin-bottom: 30px;
-      transition: background-color 0.3s ease;
-    }
-
-    .pix-code:hover {
-      background-color: #ffe680;
-    }
-
-    .btn-pago {
-      background-color: #00a650;
-      color: white;
-      font-weight: 700;
-      padding: 15px 0;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background-color 0.3s ease;
       margin-top: 15px;
+      background: #fff;
+      padding: 10px;
+      border: 1px dashed #ccc;
+      font-size: 13px;
+      color: #444;
+      word-break: break-all;
     }
 
-    .btn-pago:hover {
-      background-color: #007a3d;
+    .copy-btn {
+      margin-top: 10px;
+      background-color: #3483fa;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .copy-btn:hover {
+      background-color: #2769c6;
     }
   </style>
 </head>
-<body>
-  <header class="header-site">
-    <a href="index.html" class="logo-link">
-      <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
-    </a>
-  </header>
+<body class="cep-page">
+  <a href="index.html" class="logo-link">
+    <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
+  </a>
 
-  <main class="container pix-container">
-    <h2>Oferta especial para pagamento via Pix!</h2>
+  <div class="pix-box">
+    <h2>Pagamento com desconto via Pix</h2>
     <div class="timer" id="timer">15:00</div>
+    <img src="assets/qrcode-pix.png" alt="QR Code Pix" />
 
-    <img src="assets/qrcode-pix.png" alt="QR Code Pix" class="pix-qrcode" />
-
-    <div class="pix-code" id="pixCode" title="Clique para copiar o código Pix">
-      00020126580014BR.GOV.BCB.PIX0114+5561999999999520400005303986540415.005802BR5925Nome do Recebedor6009CidadePIX62070503***6304B13F
-    </div>
-
-    <button class="btn-pago" id="btnPago">Já paguei, quero finalizar</button>
-  </main>
+    <div class="pix-code" id="pixCode">00020126360014BR.GOV.BCB.PIX0114+5511999999995204000053039865802BR5912LibreMerc6009SAO PAULO62290525mensagem-livremerc6304ABCD</div>
+    <button class="copy-btn" onclick="copiarPix()">Copiar código Pix</button>
+  </div>
 
   <script>
-    // Contador regressivo 15 minutos
-    let timeLeft = 15 * 60; // segundos
-    const timerEl = document.getElementById('timer');
+    // Timer regressivo de 15 minutos
+    let tempo = 15 * 60;
+    const timerEl = document.getElementById("timer");
+    const updateTimer = () => {
+      const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
+      const segundos = String(tempo % 60).padStart(2, '0');
+      timerEl.textContent = `${minutos}:${segundos}`;
+      if (tempo > 0) tempo--;
+    };
+    setInterval(updateTimer, 1000);
 
-    function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-      const seconds = (timeLeft % 60).toString().padStart(2, '0');
-      timerEl.textContent = `${minutes}:${seconds}`;
-      if (timeLeft > 0) {
-        timeLeft--;
-      } else {
-        clearInterval(timerInterval);
-        alert("Tempo esgotado! Refaça o pedido.");
-        // Pode redirecionar para a home ou cep:
-        window.location.href = "index.html";
-      }
+    // Função copiar código Pix
+    function copiarPix() {
+      const texto = document.getElementById("pixCode").innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("Código Pix copiado!");
+      });
     }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
-
-    // Copiar código Pix ao clicar
-    const pixCodeEl = document.getElementById('pixCode');
-    pixCodeEl.addEventListener('click', () => {
-      navigator.clipboard.writeText(pixCodeEl.textContent.trim())
-        .then(() => alert('Código Pix copiado!'))
-        .catch(() => alert('Erro ao copiar código Pix'));
-    });
-
-    // Botão "Já paguei"
-    document.getElementById('btnPago').addEventListener('click', () => {
-      alert('Obrigado pelo pagamento! Seu pedido será processado.');
-      window.location.href = 'index.html'; // Pode mudar para página de confirmação, se quiser
-    });
   </script>
 </body>
 </html>
