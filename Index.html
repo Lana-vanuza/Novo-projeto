@@ -145,7 +145,46 @@
     });
   });
 </script>
+<script>
+  let startX = 0;
+  let currentImageIndex = 0;
 
+  const mainImage = document.getElementById('mainImage');
+
+  mainImage.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  mainImage.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    handleSwipe(startX, endX);
+  });
+
+  mainImage.addEventListener('mousedown', (e) => {
+    startX = e.clientX;
+  });
+
+  mainImage.addEventListener('mouseup', (e) => {
+    const endX = e.clientX;
+    handleSwipe(startX, endX);
+  });
+
+  function handleSwipe(start, end) {
+    const deltaX = start - end;
+    if (Math.abs(deltaX) < 50) return; // ignore toques leves
+
+    if (deltaX > 0) {
+      // swipe para esquerda → próxima imagem
+      currentImageIndex = (currentImageIndex + 1) % imagens.length;
+    } else {
+      // swipe para direita → imagem anterior
+      currentImageIndex = (currentImageIndex - 1 + imagens.length) % imagens.length;
+    }
+
+    trocarImagem(currentImageIndex);
+  }
+</script>
+  
 
 </body>
 </html>
