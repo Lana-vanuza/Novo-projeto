@@ -93,7 +93,8 @@
     // Exibe o CEP e cidade salvos no localStorage, se existirem
     const cepSalvo = localStorage.getItem("cep");
     const cidadeSalva = localStorage.getItem("cidade");
-
+cepInfo.innerHTML = `<a href="cep.html"><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></a>`;
+    
     if (cepSalvo && cidadeSalva) {
       const cepInfo = document.getElementById("cep-info");
       cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
