@@ -38,8 +38,11 @@
   </header>
 
   <section class="cep-bar" id="cep-info">
-    <a href="cep.html" class="btn-cep"><i class="fas fa-map-marker-alt"></i> Informe seu CEP</a>
-  </section>
+  <a href="cep.html" id="cep-link">
+    <i class="fas fa-map-marker-alt"></i> Informe seu CEP
+  </a>
+</section>
+
 
   <main class="produto-container">
     <section class="info-produto">
@@ -90,17 +93,15 @@
   </main>
 
   <script>
-    // Exibe o CEP e cidade salvos no localStorage, se existirem
-    const cepSalvo = localStorage.getItem("cep");
-const cidadeSalva = localStorage.getItem("cidade");
+  const cep = localStorage.getItem("cep");
+  const cidade = localStorage.getItem("cidade");
 
-if (cepSalvo && cidadeSalva) {
-  const cepInfo = document.getElementById("cep-info");
-  cepInfo.innerHTML = `<a href="cep.html"><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></a>`;
-  cepInfo.classList.add("cep-bar"); // Garante o fundo amarelo
-}
+  if (cep && cidade) {
+    const link = document.getElementById("cep-link");
+    link.innerHTML = `<i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cep}, ${cidade}</strong>`;
+  }
+</script>
 
-  </script>
   
   <script>
   const imagens = [
