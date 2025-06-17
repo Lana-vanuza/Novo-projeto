@@ -2,33 +2,68 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pagamento PIX | Mercado Livre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento via PIX | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .pix-container {
+      text-align: center;
+      padding: 20px;
+    }
+    .pix-container img {
+      width: 250px;
+      margin-bottom: 20px;
+    }
+    .pix-code {
+      word-break: break-all;
+      background: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .timer {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #ff0000;
+    }
+  </style>
 </head>
 <body class="pix-page">
-
   <header>
-    <div class="header-content" style="background-color: #ffe600; padding: 12px 0; display: flex; justify-content: center;">
+    <div class="header-content">
       <a href="index.html">
-        <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" style="height: 50px; cursor: pointer;" />
+        <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
       </a>
     </div>
   </header>
 
   <main class="container">
-    <h2>Pagamento via PIX</h2>
-
-    <p>Use os dados abaixo para efetuar o pagamento PIX:</p>
-    <div class="pix-info" style="background: #f8f8f8; padding: 15px; border-radius: 8px; max-width: 400px; margin: 10px auto;">
-      <p><strong>Chave PIX:</strong> 000.000.000-00</p>
-      <p><strong>Nome:</strong> LibreMerc Comércio</p>
-      <p><strong>Banco:</strong> 000 - Banco Exemplo</p>
-      <p><strong>Valor:</strong> R$ 150,00</p>
+    <div class="pix-container">
+      <h2>Escaneie o QR Code abaixo para pagar</h2>
+      <img src="assets/qrcode-pix.png" alt="QR Code PIX" />
+      <p class="pix-code" id="pixCode">
+        00020101021126580014BR.GOV.BCB.PIX0136506341452345698415204000053039865802BR5925LOJA LIBREMERC LTDA6009SAO PAULO62240520LIBREMERC-PIX-20236270404A8B
+      </p>
+      <p class="timer" id="timer">Tempo restante: 15:00</p>
     </div>
-
-    <button onclick="window.location.href='checkout.html'">Voltar para Finalizar Compra</button>
   </main>
 
+  <script>
+    let timeLeft = 15 * 60;
+    const timerEl = document.getElementById("timer");
+
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerEl.textContent = `Tempo restante: ${minutes}:${seconds.toString().padStart(2, "0")}`;
+      if (timeLeft > 0) {
+        timeLeft--;
+        setTimeout(updateTimer, 1000);
+      } else {
+        timerEl.textContent = "Tempo expirado. Por favor, gere um novo código.";
+      }
+    }
+
+    updateTimer();
+  </script>
 </body>
 </html>
