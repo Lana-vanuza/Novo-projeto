@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Informe seu Endereço | LibreMerc</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informe seu Endereço | LibreMerc</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="cep-page">
 
-  <header>
-    <a href="index.html">
-      <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
-    </a>
-  </header>
+  <header>
+    <a href="index.html">
+      <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
+    </a>
+  </header>
 
-  <div class="cep-container">
-    <h2>Informe seu endereço para entrega</h2>
-    <form id="cepForm">
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" required />
+  <div class="cep-container">
+    <h2>Informe seu endereço para entrega</h2>
+    <form id="cepForm">
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" required />
 
-      <label for="cidade">Cidade:</label>
-      <input type="text" id="cidade" required />
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" required />
 
-      <label for="estado">Estado (UF):</label>
-      <input type="text" id="estado" required />
+      <label for="estado">Estado (UF):</label>
+      <input type="text" id="estado" required />
 
-      <label for="rua">Rua:</label>
-      <input type="text" id="rua" required />
+      <label for="rua">Rua:</label>
+      <input type="text" id="rua" required />
 
-      <label for="numero">Número:</label>
-      <input type="text" id="numero" required />
+      <label for="numero">Número:</label>
+      <input type="text" id="numero" required />
 
-      <label for="bairro">Bairro:</label>
-      <input type="text" id="bairro" required />
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" required />
 
-      <label for="complemento">Complemento:</label>
-      <input type="text" id="complemento" />
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" />
 
-      <button type="submit">Salvar endereço</button>
-    </form>
-  </div>
+      <button type="submit">Salvar endereço</button>
+    </form>
+  </div>
 
-  <script>
-    document.getElementById("cep").addEventListener("blur", async () => {
-      const cep = document.getElementById("cep").value.replace(/\D/g, "");
-      if (cep.length !== 8) return;
+  <script>
+    document.getElementById("cep").addEventListener("blur", async () => {
+      const cep = document.getElementById("cep").value.replace(/\D/g, "");
+      if (cep.length !== 8) return;
 
-      try {
-        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-        const data = await res.json();
-        if (!data.erro) {
-          document.getElementById("cidade").value = data.localidade;
-          document.getElementById("estado").value = data.uf;
-          document.getElementById("rua").value = data.logradouro;
-          document.getElementById("bairro").value = data.bairro;
-        }
-      } catch (err) {
-        console.error("Erro ao buscar CEP:", err);
-      }
-    });
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+        if (!data.erro) {
+          document.getElementById("cidade").value = data.localidade;
+          document.getElementById("estado").value = data.uf;
+          document.getElementById("rua").value = data.logradouro;
+          document.getElementById("bairro").value = data.bairro;
+        }
+      } catch (err) {
+        console.error("Erro ao buscar CEP:", err);
+      }
+    });
 
-    document.getElementById("cepForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const campos = ["cep", "cidade", "estado", "rua", "numero", "bairro", "complemento"];
-      campos.forEach(id => localStorage.setItem(id, document.getElementById(id).value));
-      window.location.href = "index.html";
-    });
-  </script>
+    document.getElementById("cepForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const campos = ["cep", "cidade", "estado", "rua", "numero", "bairro", "complemento"];
+      campos.forEach(id => localStorage.setItem(id, document.getElementById(id).value));
+      window.location.href = "index.html";
+    });
+  </script>
 
 </body>
 </html>
