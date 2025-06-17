@@ -239,6 +239,26 @@
       }
     });
   </script>
+  <script>// Preenche os campos automaticamente se já houver dados salvos
+window.addEventListener("load", () => {
+  document.getElementById("nome").value = localStorage.getItem("nome") || "";
+  document.getElementById("email").value = localStorage.getItem("email") || "";
+  document.getElementById("cpf").value = localStorage.getItem("cpf") || "";
+  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+
+  // Se voltou do cep.html, abre o popup
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("pop") === "true") {
+    const endereco = getEnderecoLocalStorage();
+    const nome = localStorage.getItem("nome") || "";
+    const email = localStorage.getItem("email") || "";
+    const cpf = localStorage.getItem("cpf") || "";
+    const telefone = localStorage.getItem("telefone") || "";
+
+    preencherPopup({ nome, email, cpf, telefone, ...endereco });
+  }
+});
+  </script>
 
 </body>
 </html>
