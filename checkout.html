@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout | LibreMerc</title>
+  <title>Checkout | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .popup {
       position: fixed;
-      top: 0; left: 0; right:0; bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.5);
       display: flex;
       align-items: center;
@@ -81,7 +81,6 @@
     </form>
   </main>
 
-  <!-- Pop-up -->
   <div id="popup" class="popup hidden" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
     <div class="popup-content">
       <h3 id="popupTitle">Confira seus dados</h3>
@@ -95,13 +94,11 @@
     function validarCPF(cpf) {
       cpf = cpf.replace(/[^\d]+/g, '');
       if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-
       let soma = 0;
       for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
       let resto = (soma * 10) % 11;
       if (resto === 10 || resto === 11) resto = 0;
       if (resto !== parseInt(cpf.charAt(9))) return false;
-
       soma = 0;
       for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
       resto = (soma * 10) % 11;
@@ -124,7 +121,6 @@
     function preencherPopup(dados) {
       const popup = document.getElementById("popup");
       const confirmacao = document.getElementById("dados-confirmacao");
-
       confirmacao.innerHTML = `
         <p><strong>Nome:</strong> ${dados.nome}</p>
         <p><strong>E-mail:</strong> ${dados.email}</p>
@@ -137,20 +133,16 @@
         <p>CEP: ${dados.cep}</p>
         <p>${dados.complemento || ""}</p>
       `;
-
       popup.classList.remove("hidden");
     }
 
-    // Máscara CPF
     function formatarCPF(value) {
-      return value
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      return value.replace(/\D/g, '')
+                  .replace(/(\d{3})(\d)/, '$1.$2')
+                  .replace(/(\d{3})(\d)/, '$1.$2')
+                  .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     }
 
-    // Máscara telefone
     function formatarTelefone(value) {
       value = value.replace(/\D/g, '');
       if (value.length > 11) value = value.slice(0, 11);
@@ -176,7 +168,6 @@
 
     document.getElementById("checkoutForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const nome = document.getElementById("nome").value.trim();
       const email = document.getElementById("email").value.trim();
       const cpf = document.getElementById("cpf").value.trim();
@@ -189,6 +180,10 @@
       }
 
       if (!endereco.cep || !endereco.rua || !endereco.numero || !endereco.bairro || !endereco.cidade || !endereco.estado) {
+        localStorage.setItem("nome", nome);
+        localStorage.setItem("email", email);
+        localStorage.setItem("cpf", cpf);
+        localStorage.setItem("telefone", telefone);
         window.location.href = "cep.html?from=checkout";
         return;
       }
@@ -197,7 +192,6 @@
       localStorage.setItem("email", email);
       localStorage.setItem("cpf", cpf);
       localStorage.setItem("telefone", telefone);
-
       preencherPopup({ nome, email, cpf, telefone, ...endereco });
     });
 
@@ -206,13 +200,11 @@
     });
 
     window.addEventListener("load", () => {
-      // Preenche os campos do formulário
       document.getElementById("nome").value = localStorage.getItem("nome") || "";
       document.getElementById("email").value = localStorage.getItem("email") || "";
       document.getElementById("cpf").value = localStorage.getItem("cpf") || "";
       document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
 
-      // Se veio da página de CEP
       const params = new URLSearchParams(window.location.search);
       if (params.get("pop") === "true") {
         const nome = localStorage.getItem("nome") || "";
@@ -220,7 +212,6 @@
         const cpf = localStorage.getItem("cpf") || "";
         const telefone = localStorage.getItem("telefone") || "";
         const endereco = getEnderecoLocalStorage();
-
         if (nome && email && cpf && telefone) {
           preencherPopup({ nome, email, cpf, telefone, ...endereco });
         }
