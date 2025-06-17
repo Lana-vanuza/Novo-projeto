@@ -61,14 +61,13 @@ header .logo {
 }
 
 /* FAIXA DE CEP */
-.cep-bar {
-  background-color: #ffe600;
-  width: 100%;
-  padding: 8px 15px;
-  box-sizing: border-box;
-  border-top: 1px solid #f7d700;
-  border-bottom: 1px solid #f7d700;
-  font-size: 14px;
+.btn-cep {
+  background-color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
 }
 
 .cep-bar a,
@@ -139,7 +138,8 @@ header .logo {
 
 .estrelas {
   color: #3483fa;
-  font-size: 16px;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
 }
 
 .total {
@@ -194,14 +194,14 @@ header .logo {
   transition: opacity 0.3s ease-in-out;
   will-change: opacity;
 }
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
 .fade-in {
   opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
 }
 
 /* Destaque oferta do dia */
