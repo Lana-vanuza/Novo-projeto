@@ -3,101 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pagamento via Pix | Mercado Livre</title>
+  <title>Pagamento PIX | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .pix-box {
-      max-width: 400px;
-      margin: 30px auto;
-      background-color: #fffbe6;
-      padding: 20px 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-
-    .pix-box h2 {
-      font-size: 20px;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    .timer {
-      font-size: 18px;
-      color: red;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .pix-box img {
-      width: 100%;
-      max-width: 300px;
-      margin: 10px auto;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .pix-code {
-      margin-top: 15px;
-      background: #fff;
-      padding: 10px;
-      border: 1px dashed #ccc;
-      font-size: 13px;
-      color: #444;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      margin-top: 10px;
-      background-color: #3483fa;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .copy-btn:hover {
-      background-color: #2769c6;
-    }
-  </style>
 </head>
-<body class="cep-page">
-  <a href="index.html" class="logo-link">
-    <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
-  </a>
+<body class="pix-page">
 
-  <div class="pix-box">
-    <h2>Pagamento com desconto via Pix</h2>
-    <div class="timer" id="timer">15:00</div>
-    <img src="assets/qrcode-pix.png" alt="QR Code Pix" />
+  <header>
+    <div class="header-content" style="background-color: #ffe600; padding: 12px 0; display: flex; justify-content: center;">
+      <a href="index.html">
+        <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" style="height: 50px; cursor: pointer;" />
+      </a>
+    </div>
+  </header>
 
-    <div class="pix-code" id="pixCode">00020126360014BR.GOV.BCB.PIX0114+5511999999995204000053039865802BR5912LibreMerc6009SAO PAULO62290525mensagem-livremerc6304ABCD</div>
-    <button class="copy-btn" onclick="copiarPix()">Copiar código Pix</button>
-  </div>
+  <main class="container">
+    <h2>Pagamento via PIX</h2>
 
-  <script>
-    // Timer regressivo de 15 minutos
-    let tempo = 15 * 60;
-    const timerEl = document.getElementById("timer");
-    const updateTimer = () => {
-      const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-      const segundos = String(tempo % 60).padStart(2, '0');
-      timerEl.textContent = `${minutos}:${segundos}`;
-      if (tempo > 0) tempo--;
-    };
-    setInterval(updateTimer, 1000);
+    <p>Use os dados abaixo para efetuar o pagamento PIX:</p>
+    <div class="pix-info" style="background: #f8f8f8; padding: 15px; border-radius: 8px; max-width: 400px; margin: 10px auto;">
+      <p><strong>Chave PIX:</strong> 000.000.000-00</p>
+      <p><strong>Nome:</strong> LibreMerc Comércio</p>
+      <p><strong>Banco:</strong> 000 - Banco Exemplo</p>
+      <p><strong>Valor:</strong> R$ 150,00</p>
+    </div>
 
-    // Função copiar código Pix
-    function copiarPix() {
-      const texto = document.getElementById("pixCode").innerText;
-      navigator.clipboard.writeText(texto).then(() => {
-        alert("Código Pix copiado!");
-      });
-    }
-  </script>
+    <button onclick="window.location.href='checkout.html'">Voltar para Finalizar Compra</button>
+  </main>
+
 </body>
 </html>
