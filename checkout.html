@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout | Mercado Livre</title>
+  <title>Checkout | LibreMerc</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     .popup {
@@ -81,6 +81,7 @@
     </form>
   </main>
 
+  <!-- Pop-up -->
   <div id="popup" class="popup hidden" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
     <div class="popup-content">
       <h3 id="popupTitle">Confira seus dados</h3>
@@ -96,15 +97,13 @@
       if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
       let soma = 0;
-      for (let i = 0; i < 9; i++)
-        soma += parseInt(cpf.charAt(i)) * (10 - i);
+      for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
       let resto = (soma * 10) % 11;
       if (resto === 10 || resto === 11) resto = 0;
       if (resto !== parseInt(cpf.charAt(9))) return false;
 
       soma = 0;
-      for (let i = 0; i < 10; i++)
-        soma += parseInt(cpf.charAt(i)) * (11 - i);
+      for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
       resto = (soma * 10) % 11;
       if (resto === 10 || resto === 11) resto = 0;
       return resto === parseInt(cpf.charAt(10));
@@ -142,6 +141,7 @@
       popup.classList.remove("hidden");
     }
 
+    // Máscara CPF
     function formatarCPF(value) {
       return value
         .replace(/\D/g, '')
@@ -150,9 +150,10 @@
         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     }
 
+    // Máscara telefone
     function formatarTelefone(value) {
       value = value.replace(/\D/g, '');
-      if (value.length > 11) value = value.slice(0,11);
+      if (value.length > 11) value = value.slice(0, 11);
       if (value.length > 10) {
         return value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
       } else if (value.length > 5) {
@@ -197,13 +198,7 @@
       localStorage.setItem("cpf", cpf);
       localStorage.setItem("telefone", telefone);
 
-      preencherPopup({
-        nome,
-        email,
-        cpf,
-        telefone,
-        ...endereco
-      });
+      preencherPopup({ nome, email, cpf, telefone, ...endereco });
     });
 
     document.getElementById("fecharPopup").addEventListener("click", () => {
@@ -211,12 +206,13 @@
     });
 
     window.addEventListener("load", () => {
-      // Preenche os campos
+      // Preenche os campos do formulário
       document.getElementById("nome").value = localStorage.getItem("nome") || "";
       document.getElementById("email").value = localStorage.getItem("email") || "";
       document.getElementById("cpf").value = localStorage.getItem("cpf") || "";
       document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
 
+      // Se veio da página de CEP
       const params = new URLSearchParams(window.location.search);
       if (params.get("pop") === "true") {
         const nome = localStorage.getItem("nome") || "";
@@ -231,5 +227,6 @@
       }
     });
   </script>
+
 </body>
 </html>
