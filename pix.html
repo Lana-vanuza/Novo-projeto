@@ -3,142 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pagamento Pix - LibreMerc</title>
+  <title>Pagamento via Pix | Mercado Livre</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
   <style>
-    /* Estilos extras específicos da página Pix */
-    main.pix-container {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    /* Estilo extra só para o pix */
+
+    .pix-container {
       text-align: center;
     }
-    main.pix-container h2 {
-      color: #00a650;
-      margin-bottom: 10px;
+
+    .timer {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #e65100;
+      margin-bottom: 25px;
     }
-    .cronometro {
-      font-size: 36px;
-      font-weight: bold;
-      color: #f73;
-      margin-bottom: 20px;
+
+    .pix-qrcode {
+      max-width: 250px;
+      margin: 0 auto 25px auto;
+      border: 3px solid #ffd700;
+      border-radius: 15px;
+      padding: 10px;
+      background: white;
+      box-shadow: 0 0 15px #ffd700aa;
     }
-    .qr-code {
-      margin-bottom: 15px;
-    }
-    .pix-codigo {
+
+    .pix-code {
       font-family: monospace;
-      background: #f5f5f5;
-      padding: 8px;
-      border-radius: 6px;
+      background: #fffbcc;
+      border: 1.5px dashed #e65100;
+      padding: 12px 18px;
+      border-radius: 10px;
       user-select: all;
-      margin-bottom: 20px;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 1rem;
+      margin-bottom: 30px;
+      transition: background-color 0.3s ease;
     }
-    .btn-copiar {
+
+    .pix-code:hover {
+      background-color: #ffe680;
+    }
+
+    .btn-pago {
       background-color: #00a650;
       color: white;
+      font-weight: 700;
+      padding: 15px 0;
+      width: 100%;
       border: none;
-      padding: 12px 20px;
-      font-weight: bold;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
-      margin-bottom: 20px;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
     }
-    .btn-copiar:hover {
-      background-color: #00833d;
-    }
-    .mensagem-sucesso {
-      color: #00a650;
-      font-weight: bold;
-      display: none;
-      margin-top: 10px;
+
+    .btn-pago:hover {
+      background-color: #007a3d;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <img src="assets/logo.png" alt="Logo LibreMerc" class="logo" />
-    <div class="header-center">
-      <input type="search" class="busca-input" placeholder="Estou buscando..." />
-      <i class="fas fa-bars menu-icon"></i>
-      <i class="fas fa-shopping-cart cart-icon"></i>
-    </div>
+  <header class="header-site">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-1.png" alt="Logo LibreMerc" class="logo" />
+    </a>
   </header>
 
-  <section class="cep-bar" id="cep-info">
-    <a href="cep.html"><i class="fas fa-map-marker-alt"></i> Informe seu CEP</a>
-  </section>
+  <main class="container pix-container">
+    <h2>Oferta especial para pagamento via Pix!</h2>
+    <div class="timer" id="timer">15:00</div>
 
-  <main class="pix-container">
-    <h2>Oferta especial: desconto para pagamento via Pix!</h2>
-    <div class="cronometro" id="cronometro">15:00</div>
+    <img src="assets/qrcode-pix.png" alt="QR Code Pix" class="pix-qrcode" />
 
-    <div class="qr-code">
-      <img src="assets/pix-qr-example.png" alt="QR Code Pix" width="200" />
+    <div class="pix-code" id="pixCode" title="Clique para copiar o código Pix">
+      00020126580014BR.GOV.BCB.PIX0114+5561999999999520400005303986540415.005802BR5925Nome do Recebedor6009CidadePIX62070503***6304B13F
     </div>
 
-    <div class="pix-codigo" id="pixCodigo">00020126580014BR.GOV.BCB.PIX0136abc1234-xyz7894abcdef5204000053039865405100.005802BR5925LibreMerc Comércio LTDA6009Sao Paulo61080540900062070503***6304B14F</div>
-
-    <button class="btn-copiar" id="btnCopiar">Copiar código Pix</button>
-
-    <div class="mensagem-sucesso" id="mensagemSucesso">Código copiado com sucesso!</div>
-
-    <button class="btn-pagar" id="btnFinalizar">Finalize seu pedido</button>
+    <button class="btn-pago" id="btnPago">Já paguei, quero finalizar</button>
   </main>
 
   <script>
-    // Mostrar CEP salvo na faixa amarela
-    const cepSalvo = localStorage.getItem("cep");
-    const cidadeSalva = localStorage.getItem("cidade");
+    // Contador regressivo 15 minutos
+    let timeLeft = 15 * 60; // segundos
+    const timerEl = document.getElementById('timer');
 
-    if (cepSalvo && cidadeSalva) {
-      const cepInfo = document.getElementById("cep-info");
-      cepInfo.innerHTML = `<p><i class="fas fa-map-marker-alt"></i> Entrega para: <strong>${cepSalvo}, ${cidadeSalva}</strong></p>`;
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+      const seconds = (timeLeft % 60).toString().padStart(2, '0');
+      timerEl.textContent = `${minutes}:${seconds}`;
+      if (timeLeft > 0) {
+        timeLeft--;
+      } else {
+        clearInterval(timerInterval);
+        alert("Tempo esgotado! Refaça o pedido.");
+        // Pode redirecionar para a home ou cep:
+        window.location.href = "index.html";
+      }
     }
 
-    // Cronômetro regressivo 15 minutos
-    let tempo = 900; // 15 minutos em segundos
-    const cronometro = document.getElementById('cronometro');
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
 
-    const timerInterval = setInterval(() => {
-      const min = Math.floor(tempo / 60);
-      const seg = tempo % 60;
-      cronometro.textContent = `${min.toString().padStart(2,'0')}:${seg.toString().padStart(2,'0')}`;
-      tempo--;
-
-      if (tempo < 0) {
-        clearInterval(timerInterval);
-        cronometro.textContent = "Tempo esgotado!";
-        document.getElementById('btnFinalizar').disabled = true;
-        document.getElementById('btnCopiar').disabled = true;
-      }
-    }, 1000);
-
-    // Copiar código Pix
-    document.getElementById('btnCopiar').addEventListener('click', () => {
-      const codigo = document.getElementById('pixCodigo').textContent;
-      navigator.clipboard.writeText(codigo).then(() => {
-        const msg = document.getElementById('mensagemSucesso');
-        msg.style.display = 'block';
-        setTimeout(() => {
-          msg.style.display = 'none';
-        }, 2000);
-      });
+    // Copiar código Pix ao clicar
+    const pixCodeEl = document.getElementById('pixCode');
+    pixCodeEl.addEventListener('click', () => {
+      navigator.clipboard.writeText(pixCodeEl.textContent.trim())
+        .then(() => alert('Código Pix copiado!'))
+        .catch(() => alert('Erro ao copiar código Pix'));
     });
 
-    // Finalizar pedido (pode ser redirecionar para outra página ou só alert)
-    document.getElementById('btnFinalizar').addEventListener('click', () => {
-      alert('Obrigado pela sua compra! Assim que confirmarmos o pagamento, enviaremos a nota fiscal.');
-      // Limpar localStorage, redirecionar, etc, conforme queira
-      // localStorage.clear();
-      // window.location.href = "index.html";
+    // Botão "Já paguei"
+    document.getElementById('btnPago').addEventListener('click', () => {
+      alert('Obrigado pelo pagamento! Seu pedido será processado.');
+      window.location.href = 'index.html'; // Pode mudar para página de confirmação, se quiser
     });
   </script>
-
 </body>
 </html>
