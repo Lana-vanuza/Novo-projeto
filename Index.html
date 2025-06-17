@@ -56,12 +56,26 @@
   <div class="main-image">
     <img src="assets/produto-a.jpeg" alt="Galaxy A25" id="mainImage" />
   </div>
-  <div class="thumbnail-carousel">
-    <img src="assets/produto-a.jpeg" onclick="changeImage(this)" />
-    <img src="assets/produto-b.jpeg" onclick="changeImage(this)" />
-    <img src="assets/produto-c.jpeg" onclick="changeImage(this)" />
+  <div class="dot-indicators">
+    <span class="dot active" onclick="trocarImagem(0)"></span>
+    <span class="dot" onclick="trocarImagem(1)"></span>
+    <span class="dot" onclick="trocarImagem(2)"></span>
   </div>
 </section>
+
+<script>
+  const imagens = [
+    'assets/produto-a.jpeg',
+    'assets/produto-b.jpeg',
+    'assets/produto-c.jpeg'
+  ];
+
+  function trocarImagem(index) {
+    document.getElementById('mainImage').src = imagens[index];
+    document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+    document.querySelectorAll('.dot')[index].classList.add('active');
+  }
+</script>
 
       <div class="oferta-dia">OFERTA DO DIA</div>
 
@@ -100,10 +114,18 @@
     }
   </script>
   <script>
-  function changeImage(el) {
-    const mainImage = document.getElementById('mainImage');
-    mainImage.src = el.src;
-  }
+  const imagens = [
+  'assets/produto-a.jpeg',
+  'assets/produto-b.jpeg',
+  'assets/produto-c.jpeg'
+];
+
+function trocarImagem(index) {
+  document.getElementById('mainImage').src = imagens[index];
+  document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+  document.querySelectorAll('.dot')[index].classList.add('active');
+}
+
 
   // Lightbox: clicar na imagem principal abre em tela cheia
   document.getElementById('mainImage').addEventListener('click', function () {
