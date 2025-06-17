@@ -113,11 +113,9 @@ if (cepSalvo && cidadeSalva) {
   let startX = 0;
 
   const mainImage = document.getElementById('mainImage');
-
-  function trocarImagem(index) {
+function trocarImagem(index) {
   const lightboxImg = document.querySelector('#lightbox img');
-
-  // Remove fade-in se existir e aplica fade-out
+  
   mainImage.classList.remove('fade-in');
   mainImage.classList.add('fade-out');
 
@@ -126,32 +124,28 @@ if (cepSalvo && cidadeSalva) {
     lightboxImg.classList.add('fade-out');
   }
 
-  // Troca a imagem após o fade-out
   setTimeout(() => {
     mainImage.src = imagens[index];
-    if (lightboxImg) lightboxImg.src = imagens[index];
-  }, 150);
-
-  // Ao carregar a nova imagem, aplica fade-in
-  mainImage.onload = () => {
-    mainImage.classList.remove('fade-out');
-    mainImage.classList.add('fade-in');
-  };
-
-  if (lightboxImg) {
-    lightboxImg.onload = () => {
-      lightboxImg.classList.remove('fade-out');
-      lightboxImg.classList.add('fade-in');
+    mainImage.onload = () => {
+      mainImage.classList.remove('fade-out');
+      mainImage.classList.add('fade-in');
     };
-  }
 
+    if (lightboxImg) {
+      lightboxImg.src = imagens[index];
+      lightboxImg.onload = () => {
+        lightboxImg.classList.remove('fade-out');
+        lightboxImg.classList.add('fade-in');
+      };
+    }
+  }, 100); // dá tempo do fade-out acontecer
   currentImageIndex = index;
 
   const dots = document.querySelectorAll('.dot');
   dots.forEach(dot => dot.classList.remove('active'));
   if (dots[index]) dots[index].classList.add('active');
-  }
-    
+}
+  
 
   mainImage.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
