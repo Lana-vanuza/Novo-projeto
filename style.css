@@ -72,16 +72,28 @@ header .logo {
 
 .cep-bar {
   background-color: #ffe600;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 
 .cep-bar a {
   color: #000;
   text-decoration: none;
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: normal;
 }
+
+.cep-bar i {
+  font-size: 16px;
+  color: #000;
+}
+
 
 
 /* CONTAINER PRINCIPAL */
