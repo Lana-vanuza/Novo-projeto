@@ -6,6 +6,8 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
@@ -89,11 +91,11 @@ header {
 /* CONTAINER PRINCIPAL PRODUTO */
 .produto-container {
   max-width: 700px;
-  margin: 20px auto;
+  margin: 5px auto;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 5px;
 }
 
 /* INFO PRODUTO */
