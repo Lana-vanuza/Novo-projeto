@@ -2,7 +2,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -91,11 +90,11 @@ header {
 /* CONTAINER PRINCIPAL PRODUTO */
 .produto-container {
   max-width: 700px;
-  margin: 5px auto;
+  margin: 0px auto;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 5px;
+  padding: 0px;
 }
 
 /* INFO PRODUTO */
