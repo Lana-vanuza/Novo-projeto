@@ -16,31 +16,30 @@ body {
 header {
   background-color: #ffe600;
   width: 100%;
-  padding: 10px 15px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 15px;
-  flex-wrap: wrap;
   box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
-header .logo {
+.logo {
   height: 40px;
   display: block;
-  flex-shrink: 0;
 }
 
 .header-center {
   flex-grow: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
 .busca-input {
-  width: 100%;
-  max-width: 400px;
+  flex-grow: 1;
   padding: 8px 12px;
   border-radius: 4px;
   border: 1px solid #ddd;
@@ -53,29 +52,28 @@ header .logo {
   border-color: #3483fa;
 }
 
-.menu-icon,
 .cart-icon {
   font-size: 20px;
   color: #333;
   cursor: pointer;
 }
 
-/* FAIXA DE CEP */
+/* FAIXA DE CEP LOGO ABAIXO DO HEADER */
 .cep-bar {
   background-color: #ffe600;
   padding: 10px 16px;
   display: flex;
   align-items: center;
-  font-weight: normal;
-  font-family: Arial, sans-serif;
   font-size: 14px;
+  color: #000;
+  justify-content: flex-start;
   gap: 10px;
-  justify-content: space-between;
+  font-family: Arial, sans-serif;
 }
 
 .cep-bar a {
-  color: #000;
   text-decoration: none;
+  color: #000;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -85,15 +83,6 @@ header .logo {
 .cep-bar i {
   font-size: 16px;
   color: #000;
-}
-
-.btn-cep {
-  background-color: #fff;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  color: #333;
-  text-decoration: none;
 }
 
 
