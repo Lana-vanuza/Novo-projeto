@@ -1,4 +1,5 @@
-/* RESET E BASE */
+
+/* RESET e BASE */
 * {
   margin: 0;
   padding: 0;
@@ -22,30 +23,42 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: nowrap;
+  position: relative;
+  z-index: 10;
 }
 
+/* Logo */
 .logo {
   height: 40px;
   display: block;
 }
 
+/* Centro do header */
 .header-center {
+  flex-grow: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-grow: 1;
+  gap: 10px;
 }
 
+/* Campo de busca */
 .busca-input {
   flex-grow: 1;
   padding: 8px 12px;
   border-radius: 4px;
   border: 1px solid #ddd;
   font-size: 14px;
+  transition: border-color 0.3s;
 }
 
+.busca-input:focus {
+  outline: none;
+  border-color: #3483fa;
+}
+
+/* Ícones */
 .menu-icon,
 .cart-icon {
   font-size: 20px;
@@ -53,18 +66,16 @@ header {
   cursor: pointer;
 }
 
-/* FAIXA DE CEP GRUDADA LOGO ABAIXO DO HEADER */
+/* FAIXA DE CEP LOGO ABAIXO DO HEADER */
 .cep-bar {
   background-color: #ffe600;
-  padding: 10px 16px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   font-size: 14px;
   color: #000;
+  justify-content: flex-start;
   gap: 10px;
-  border-top: 1px solid #ffe600;
-  border-bottom: 1px solid #ddd;
 }
 
 .cep-bar a {
@@ -73,6 +84,7 @@ header {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-weight: normal;
 }
 
 .cep-bar i {
